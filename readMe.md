@@ -1,0 +1,1 @@
+// "test": "echo \"Error: no test specified\" && exit 1", this was inside of script before i added all the other properties if things dont go well try copying this back into the script object 

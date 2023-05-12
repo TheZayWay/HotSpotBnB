@@ -14,16 +14,22 @@ module.exports = {
         email: 'Warriors2023@gmail.com',
         username: 'ILoveTheGSW',
         hashedPassword: bcrypt.hashSync('warriorswinning123'),
+        firstName: 'Tommy',
+        lastName: 'Bobby'
       },
       {
         email: 'MrBeastAssistant@yahoo.com',
         username: 'WinSomeGifts',
-        hashedPassword: bcrypt.hashSync('Alwaysgiving')
+        hashedPassword: bcrypt.hashSync('Alwaysgiving'),
+        firstName: 'Jim',
+        lastName: 'Carry'
       },
       {
         email: 'WeAreTheJusticeLeague@hotmail.com',
         username: 'JusticeLeagueFTW',
-        hashedPassword: bcrypt.hashSync('bestSeries')
+        hashedPassword: bcrypt.hashSync('bestSeries'),
+        firstName: 'Dennis',
+        lastName: 'Whipple'
       }
     ], {});
   },

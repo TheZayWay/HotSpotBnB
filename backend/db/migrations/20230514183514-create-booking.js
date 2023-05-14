@@ -27,22 +27,25 @@ module.exports = {
         onDelete: "CASCADE"
       },
       startDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       endDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },
   async down(queryInterface, Sequelize) {
+    options.table = 'Bookings';
     await queryInterface.dropTable('Bookings');
   }
 };

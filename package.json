@@ -1,28 +1,28 @@
 {
-  "name": "authenticate-me",
-  "version": "1.0.0",
-  "description": "// \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\", this was inside of script before i added all the other properties if things dont go well try copying this back into the script object",
-  "main": "index.js",
-  "scripts": {
-    "install": "npm --prefix backend install backend",
-    "dev:backend": "npm install --prefix backend start",
-    "sequelize": "npm run --prefix backend sequelize",
-    "sequelize-cli": "npm run --prefix backend sequelize-cli",
-    "start": "npm start --prefix backend",
-    "build": "npm run --prefix backend build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TheZayWay/API-Project.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TheZayWay/API-Project/issues"
-  },
-  "homepage": "https://github.com/TheZayWay/API-Project#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "name": "authenticate-me",
+    "version": "1.0.0",
+    "description": "// \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\", this was inside of script before i added all the other properties if things dont go well try copying this back into the script object",
+    "main": "index.js",
+    "scripts": {
+      "install": "npm --prefix backend install backend",
+      "dev:backend": "npm install --prefix backend start",
+      "sequelize": "npm run --prefix backend sequelize",
+      "sequelize-cli": "npm run --prefix backend sequelize-cli",
+      "start": "npm start --prefix backend",
+      "build": "npm run --prefix backend build"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/TheZayWay/API-Project.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/TheZayWay/API-Project/issues"
+    },
+    "homepage": "https://github.com/TheZayWay/API-Project#readme",
+    "dependencies": {
+      "bcryptjs": "^2.4.3"
+    }
   }
-}

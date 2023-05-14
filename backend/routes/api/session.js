@@ -48,7 +48,7 @@ router.post(
     const safeUser = {
       id: user.id,
       email: user.email,
-      username: user.username,
+      username: user.username
     };
 
     await setTokenCookie(res, safeUser);
@@ -73,11 +73,12 @@ router.post(
     '/',
     (req, res) => {
       const { user } = req;
+      console.log(user.id)
       if (user) {
         const safeUser = {
           id: user.id,
           email: user.email,
-          username: user.username,
+          username: user.username
         };
         return res.json({
           user: safeUser

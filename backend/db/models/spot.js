@@ -42,7 +42,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isAlpha: true
+      }
     },
     description: {
       type: DataTypes.STRING,
@@ -50,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     price: {
       type: DataTypes.DECIMAL,
-      allowNull: false 
+      allowNull: false
     }
   }, {
     sequelize,

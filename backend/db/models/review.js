@@ -5,26 +5,31 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
     static associate(models) {
-      Review.hasMany(
-        models.ReviewImage,
-        {foreignKey: 'reviewId'}
-      )
-      Review.belongsTo(
-        models.User,
-        {foreignKey: 'userId'}
-      )
-      Review.belongsTo(
-        models.Spot,
-        {foreignKey: 'spotId'}
-      )
+      Review.hasMany(models.ReviewImage, {foreignKey: 'reviewId', onDelete: 'CASCADE'});
+      Review.belongsTo(models.User, {foreignKey: 'userId', onDelete: 'CASCADE'});
+      Review.belongsTo(models.Spot, {foreignKey: 'spotId', onDelete: 'CASCADE'});
     }
   }
   Review.init({
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    spotId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     review: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     stars: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 1,
+        max: 5
+      }
     } 
   }, {
     sequelize,

@@ -5,51 +5,52 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
     static associate(models) {
-      Spot.hasMany(
-        models.Booking,
-        {foreignKey: 'spotId'}
-      )
-      Spot.hasMany(
-        models.Review,
-        {foreignKey: 'spotId'}
-      )
-      Spot.hasMany(
-        models.SpotImage,
-        {foreignKey: 'spotId'}
-      )
-      Spot.belongsTo(
-        models.User,
-        {foreignKey: 'ownerId'}
-      )
+      Spot.hasMany(models.Booking, {foreignKey: 'spotId', onDelete: 'CASCADE'});
+      Spot.hasMany(models.Review, {foreignKey: 'spotId', onDelete: 'CASCADE'});
+      Spot.hasMany(models.SpotImage, {foreignKey: 'spotId', onDelete: 'CASCADE'});
+      Spot.belongsTo(models.User, {foreignKey: 'ownerId', onDelete: 'CASCADE'});
     }
   }
   Spot.init({
+    ownerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     address: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     }, 
     city: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     state: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     country: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     latitude: {
-      type: DataTypes.DECIMAL
+      type: DataTypes.DECIMAL,
+      allowNull: false
     },
     longitude: {
-      type: DataTypes.DECIMAL
+      type: DataTypes.DECIMAL,
+      allowNull: false
     },
     name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     description: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     price: {
-      type: DataTypes.DECIMAL 
+      type: DataTypes.DECIMAL,
+      allowNull: false 
     }
   }, {
     sequelize,

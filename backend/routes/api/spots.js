@@ -37,8 +37,13 @@ const validateSignup = [
   //Create a spot
   router.post('/', async (req,res) => {
     const { id, ownerId, address, city, state, country, lat, lng, name, description, price} = req.body
-    const newSpot = await Spot.create({id, ownerId, address, city, state, country, lat, lng, name, description, price});
-    return res.status(201).json(newSpot)
+   
+    const newSpot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price});
+//     const cats = await Cat.findAll({ where: { name: 'Lucy' }, include: Owner })
+// cats[0].Owner 
+    
+    
+    // return res.status(201).json(newSpot)
   });
 
 module.exports = router;

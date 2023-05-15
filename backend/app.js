@@ -6,12 +6,17 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 
+const routes = require('./routes');
+
+const { ValidationError } = require('sequelize');
+
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
 const app = express();
 
 app.use(morgan('dev'));
+
 app.use(cookieParser());
 app.use(express.json());
 
@@ -39,10 +44,6 @@ app.use(
   })
 );
 
-const routes = require('./routes');
-
-// ...
-
 app.use(routes);
 
 // Catch unhandled requests and forward to error handler.
@@ -53,8 +54,6 @@ app.use((_req, _res, next) => {
   err.status = 404;
   next(err);
 });
-
-const { ValidationError } = require('sequelize');
 
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
@@ -81,6 +80,5 @@ app.use((err, _req, res, _next) => {
     stack: isProduction ? null : err.stack
   });
 });
-
 
 module.exports = app;

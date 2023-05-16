@@ -30,8 +30,42 @@ const validateSignup = [
 
   // Returns all spots  
   router.get('/', async (req, res) => {
-    const spot = await Spot.findAll();
-    return res.json({spot})
+    const { Review, SpotImage } = require('../../db/models');
+    
+    const spots = await Spot.findAll({
+      include: [
+        {model: SpotImage},
+        {model: Review}
+      ]
+    });
+
+    let spotsList = [];
+    spots.forEach((spot) => {
+      spotsList.push(spot.toJSON())
+    });
+    
+    spotsList.forEach((spot) => {
+      spot.SpotImages.forEach((image) => {
+        spot.previewImage = image.url
+      });
+
+      let sum = 0; 
+      let avg = 0;
+
+      spot.Reviews.forEach((review) => {
+        sum += review.stars;
+      });
+      
+      avg = sum / spot.Reviews.length;
+      spot.avgRating = avg;
+      if (!spot.avgRating) {
+        spot.avgRating = 0
+      }
+      
+      delete spot.Reviews;
+      delete spot.SpotImages;
+    })  
+    return res.json({spotsList})
   });
 
   //Create a spot

@@ -44,7 +44,6 @@ const handleSpotValidationErrors = (req, res, next) => {
         errors: err.errors
       })
     }
-  
     next()
 };
 

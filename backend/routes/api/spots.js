@@ -6,27 +6,64 @@ const { Spot, Review, SpotImage, User } = require('../../db/models');
 const router = express.Router();
 
 const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors, handleSpotValidationErrors } = require('../../utils/validation');
 
-const validateSignup = [
-    check('email')
+const validateCreateSpot = [
+  check("address")
       .exists({ checkFalsy: true })
-      .isEmail()
-      .withMessage('Please provide a valid email.'),
-    check('username')
+      .withMessage("Street address is required")
+      // .isLength({ max: 100 })
+      // .withMessage("Address must be 100 characters or less")
+  ,
+  check("city")
       .exists({ checkFalsy: true })
-      .isLength({ min: 4 })
-      .withMessage('Please provide a username with at least 4 characters.'),
-    check('username')
-      .not()
-      .isEmail()
-      .withMessage('Username cannot be an email.'),
-    check('password')
+      .withMessage("City is required")
+      // .isLength({ max: 85 })
+      // .withMessage("City must be 85 characters or less")
+  ,
+  check("state")
       .exists({ checkFalsy: true })
-      .isLength({ min: 6 })
-      .withMessage('Password must be 6 characters or more.'),
-    handleValidationErrors
-  ];
+      .withMessage("State is required")
+      // .isLength({ max: 20 })
+      // .withMessage("State must be 20 characters or less")
+  ,
+  check("country")
+      .exists({ checkFalsy: true })
+      .withMessage("Country is required")
+      // .isLength({ max: 60 })
+      // .withMessage("Country must be 60 characters or less")
+  ,
+  check("lat")
+      // .exists({ checkFalsy: true })
+      .isFloat()
+      .withMessage("Latitude is not valid")
+  ,
+  check("lng")
+      // .exists({ checkFalsy: true })
+      .isFloat()
+      .withMessage("Longitude is not valid")
+  ,
+  check("name")
+      .exists({ checkFalsy: true })
+      .withMessage("Name is required")
+      .isLength({ max: 50 })
+      .withMessage("Name must be less than 50 characters")
+  ,
+  check("description")
+      .exists({ checkFalsy: true })
+      .withMessage("Description is required")
+      // .isLength({ max: 500 })
+      // .withMessage("Description must be 500 characters or less")
+  ,
+  check("price")
+      // .exists({ checkFalsy: true })
+      .isFloat()
+      .withMessage("Price per day is required")
+      // .isFloat({ min: 1, max: 100000})
+      // .withMessage("Price must be an integer from 1 to 100000")
+  ,
+  handleSpotValidationErrors
+]
 
   // Returns all spots  
   router.get('/', async (req, res) => {
@@ -118,7 +155,7 @@ const validateSignup = [
 
   //Get Details for a Spot from an id
 
-  router.get('/:id', async (req,res) => {
+  router.get('/:spotId', async (req,res) => {
     const spotId = req.params.id;
 
     const spots = await Spot.findByPk(spotId, {
@@ -148,23 +185,19 @@ const validateSignup = [
     return res.json(spots)
   })
 
-  
-  // spotsList
-
-
-
-
-
-  //Create a spot
-  router.post('/', async (req,res) => {
-    const { id, ownerId, address, city, state, country, lat, lng, name, description, price} = req.body
-   
-    const newSpot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price});
-//     const cats = await Cat.findAll({ where: { name: 'Lucy' }, include: Owner })
-// cats[0].Owner 
-    
-    
-    // return res.status(201).json(newSpot)
+  //Create new post
+  router.post(
+    '/', 
+    requireAuth,
+    validateCreateSpot,
+    async (req,res) => {
+      const ownerId = req.user.id;
+      const { address, city, state, country, lat, lng, name, description, price} = req.body;
+      const newSpot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price});
+      // if (!newSpot) {
+      //   res.status(400)
+      // }
+      return res.status(201).json(newSpot)
   });
 
 module.exports = router;

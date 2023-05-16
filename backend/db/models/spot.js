@@ -18,31 +18,31 @@ module.exports = (sequelize, DataTypes) => {
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [5,25]
-      }
+      allowNull: false
+      // validate: {
+      //   len: [5,25]
+      // }
     }, 
     city: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [5,25]
-      }
+      allowNull: false
+      // validate: {
+      //   len: [5,25]
+      // }
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [5,25]
-      }
+      allowNull: false
+      // validate: {
+      //   len: [5,25]
+      // }
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [5,25]
-      }
+      allowNull: false
+      // validate: {
+      //   len: [5,25]
+      // }
     },
     lat: {
       type: DataTypes.DECIMAL,
@@ -56,22 +56,25 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [5,25]
+        len: [1,50]
       }
+      // validate: {
+      //   len: [5,25]
+      // }
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [5,25]
-      }
+      allowNull: false
+      // validate: {
+      //   len: [5,25]
+      // }
     },
     price: {
       type: DataTypes.DECIMAL,
-      allowNull: false,
-      validate: {
-        min: 1
-      }
+      allowNull: false
+      // validate: {
+      //   min: 1
+      // }
     }
   }, {
     sequelize,

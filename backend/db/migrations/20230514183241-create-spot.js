@@ -1,5 +1,6 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
@@ -18,60 +19,61 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: "Users"
+          model: "Users",
+          key: "id"
         },
         onDelete: "CASCADE"
       },
       address: {
-        type: Sequelize.STRING(100),
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.STRING
       },
       city: {
-        type: Sequelize.STRING(50),
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.STRING
       },
       state: {
-        type: Sequelize.STRING(50),
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.STRING
       },
       country: {
-        type: Sequelize.STRING(50),
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.STRING
       },
       lat: {
-        type: Sequelize.DECIMAL,
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.DECIMAL
       },
       lng: {
-        type: Sequelize.DECIMAL,
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.DECIMAL
       },
       name: {
-        type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.STRING(50)
       },
       description: {
-        type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.STRING(500)
       },
       price: {
-        type: Sequelize.DECIMAL,
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.DECIMAL
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
       }
-    });
+    }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.table = 'Spots';
-    await queryInterface.dropTable('Spots');
+    options.tableName = "Spots";
+    await queryInterface.dropTable(options);
   }
 };

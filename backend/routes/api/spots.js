@@ -2,7 +2,7 @@ const express = require('express')
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, Review, SpotImage } = require('../../db/models');
+const { Spot, Review, SpotImage, User } = require('../../db/models');
 const router = express.Router();
 
 const { check } = require('express-validator');
@@ -67,13 +67,8 @@ const validateSignup = [
     })  
     return res.json({spotsList})
   });
-
-
-
-
-
+  
   //Get all Spots owned by the Current User
-
   router.get(
    '/current',
    requireAuth,
@@ -121,8 +116,40 @@ const validateSignup = [
   
   });
 
+  //Get Details for a Spot from an id
 
+  router.get('/:id', async (req,res) => {
+    const spotId = req.params.id;
 
+    const spots = await Spot.findByPk(spotId, {
+      include: [
+        {model: Review},
+        {model: User, attributes: ["id", "firstName", "lastName"]},
+        {model: SpotImage, attributes: ["id", "url", "preview"]}
+      ]
+    });
+
+    if (!spots) {
+      res.status(404).json({message: "Spot couldn't be found"})
+    }
+    
+    spots.dataValues.numReviews = spots.dataValues.Reviews.length;
+    let sum = 0
+    let avg = 0
+    let reviewsArr = spots.dataValues.Reviews
+    
+    reviewsArr.forEach((review) => {
+      sum += review.stars
+    })
+    avg = sum / reviewsArr.length;
+    
+    spots.dataValues.avgStar = avg
+    delete spots.dataValues.Reviews;
+    return res.json(spots)
+  })
+
+  
+  // spotsList
 
 
 

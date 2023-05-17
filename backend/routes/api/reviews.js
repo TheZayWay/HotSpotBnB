@@ -43,11 +43,40 @@ router.get(
             return review;
           });
           delete reviews[0].dataValues.Spot.dataValues.SpotImages;
-        res.json({reviews})
+        return res.json({reviews})
     });
 
+    //Add an Image to Review based on Reviews Id
 
-
+    router.post(
+        '/:reviewId/images',
+        requireAuth,
+        async (req, res) => {
+            const reviewId = req.params.reviewId;
+            const userId = req.user.id;
+            const { url } = req.body;
+            const review = await Review.findByPk(reviewId, {
+                where: {
+                    userId: userId
+                }
+            })
+            if (!review) {
+                res.status(404).json({message: "Review couldn't be found"})
+            }
+            const reviewImages = await ReviewImage.findAll();
+            if (reviewImages.length > 10) {
+                res.status(403).json({message: "Maximum number of images for this resource was reached"})
+            } else {
+                const newReviewImage = await ReviewImage.create({reviewId, url });
+                delete newReviewImage.dataValues.reviewId;
+                delete newReviewImage.dataValues.updatedAt;
+                delete newReviewImage.dataValues.createdAt;
+                return res.json(newReviewImage)
+            }
+            
+            
+        }
+    )
 
 
     

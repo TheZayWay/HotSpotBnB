@@ -50,6 +50,20 @@ const validateCreateSpot = [
   handleSpotValidationErrors
 ]
 
+const validateDuplicateReview = [
+  check("review")
+      .exists({ checkFalsy: true })
+      .withMessage("Review text is required")
+  ,
+  check("stars")
+      .exists({ checkFalsy: true })
+      .withMessage("Stars must be an integer from 1 to 5")
+      .isInt({max: 5, min: 0})
+      .withMessage("Stars must be an integer from 1 to 5")
+  ,
+  handleSpotValidationErrors
+]
+
   // Returns all spots  
   router.get('/', async (req, res) => {
     // const { Review, SpotImage } = require('../../db/models');
@@ -286,22 +300,33 @@ const validateCreateSpot = [
     router.post(
       '/:spotId/reviews',
       requireAuth,
+      validateDuplicateReview,
       async (req, res) => {
         const spotId = req.params.spotId;
         const userId = req.user.id;
         const {review, stars} = req.body
-        
-        // const spot = await Spot.findByPk(spotId, {
-        //   attributes: ['id', 'createdAt', 'updatedAt']
-        // });
-       
-       const newReview = await Review.create({
+        const spot = await Spot.findByPk(spotId);
+       if (!spot) {
+        return res.status(404).json({message: "Spot couldn't be found"})
+      }
+      
+      const existingReview = await Review.findOne({
+        where: {
+          userId: userId,
+          spotId: spotId
+        }
+      });
+      if (existingReview) {
+        return res.status(500).json({ message: "User already has a review for this spot" });
+      }
+      
+      const newReview = await Review.create({
           userId: userId,
           spotId: spotId,
           review: review,
           stars: stars
         });
-        res.json(newReview)
+        res.status(201).json(newReview)
       }
     )
 

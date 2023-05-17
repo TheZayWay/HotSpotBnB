@@ -282,4 +282,27 @@ const validateCreateSpot = [
       }
     );
 
+    //Create a review for spot by spot Id
+    router.post(
+      '/:spotId/reviews',
+      requireAuth,
+      async (req, res) => {
+        const spotId = req.params.spotId;
+        const userId = req.user.id;
+        const {review, stars} = req.body
+        
+        // const spot = await Spot.findByPk(spotId, {
+        //   attributes: ['id', 'createdAt', 'updatedAt']
+        // });
+       
+       const newReview = await Review.create({
+          userId: userId,
+          spotId: spotId,
+          review: review,
+          stars: stars
+        });
+        res.json(newReview)
+      }
+    )
+
 module.exports = router;

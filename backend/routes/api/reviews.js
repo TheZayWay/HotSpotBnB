@@ -122,6 +122,24 @@ router.get(
         }
     )
 
+    //delete review
+
+    router.delete(
+        '/:reviewId', 
+        requireAuth, 
+        async (req, res) => {
+          const reviewId = req.params.reviewId;
+          const review = await Spot.findByPk(reviewId);
+    
+          if(review) {
+            review.destroy();
+            res.json({ message: "Successfully deleted"})
+          } else {
+              res.status(404);
+              res.json({ message: "Review couldn't be found"})
+          }
+        }
+      );
     
 
 

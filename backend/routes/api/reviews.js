@@ -8,6 +8,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors, handleSpotValidationErrors } = require('../../utils/validation');
 
+//Get all Reviews of current user
 router.get(
     '/current',
     requireAuth,
@@ -46,5 +47,12 @@ router.get(
     });
 
 
+
+
+
+    
+
+
+    
 
 module.exports = router;

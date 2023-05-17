@@ -2,7 +2,7 @@ const express = require('express')
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, Review, SpotImage, User } = require('../../db/models');
+const { Spot, Review, SpotImage, User, ReviewImage } = require('../../db/models');
 const router = express.Router();
 
 const { check } = require('express-validator');
@@ -141,7 +141,7 @@ const validateCreateSpot = [
   //Get Details for a Spot from an id
 
   router.get('/:spotId', async (req,res) => {
-    const spotId = req.params.id;
+    const spotId = req.params.spotId;
 
     const spots = await Spot.findByPk(spotId, {
       include: [
@@ -259,5 +259,27 @@ const validateCreateSpot = [
     }
   )
 
+    //Return all reviews that belong to a spot specified by id
+    
+    router.get(
+      '/:spotId/reviews',
+      requireAuth,
+      async (req, res) => {
+        const spotId = req.params.spotId;
+        const spots = await Spot.findByPk(spotId, {
+          attributes: {
+            exclude: ['id','ownerId','address','city','state','country','lat','lng','name','description','price','createdAt','updatedAt']
+          },
+          include: [
+            { 
+              model: Review, 
+              include: [{model: User, attributes: ['id', 'firstName', 'lastName']},{model: ReviewImage, attributes: ['id', 'url']}]
+            }
+          ]
+        });
+        reviews = spots.dataValues;       
+        res.json(reviews)
+      }
+    );
 
 module.exports = router;

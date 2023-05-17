@@ -179,10 +179,54 @@ const validateCreateSpot = [
       const ownerId = req.user.id;
       const { address, city, state, country, lat, lng, name, description, price} = req.body;
       const newSpot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price});
-      // if (!newSpot) {
-      //   res.status(400)
-      // }
       return res.status(201).json(newSpot)
-  });
+    }
+  );
+
+  //Add image to a spot based on spots id
+
+  router.post(
+    '/:spotId/images',
+    requireAuth,
+    async (req,res) => {
+      const spotId = req.params.spotId
+      const ownerId = req.user.id;
+      const { url, preview} = req.body
+      const spot = await Spot.findByPk(spotId, {
+        attributes:{ exclude: ['id', 'updatedAt', 'createdAt']},
+        where: {
+          ownerId: ownerId
+        }})
+      if (!spot) {
+        res.status(404).json({message: "Spot couldn't be found"})
+      }  
+      if (spot.ownerId === req.user.id) {
+        const newUrl = await SpotImage.create({spotId, url, preview})
+        return res.json(newUrl)
+      }
+      return;
+    }
+  ); 
+
+
+  //delete a spot
+  // router.delete('/:spotId', requireAuth, async(req,res,next)=>{
+  //   const spotId = req.params.spotId;
+  //   const spot = await Spot.findByPk(spotId);
+
+  //   if(spot){
+  //     spot.destroy();
+
+  //     res.json({
+  //         message: "Successfully deleted"
+  //       })
+  //   }else{
+  //     res.status(404);
+  //     res.json({
+  //         message: "Spot couldn't be found"
+  //     })
+  //   }
+  // })
+
 
 module.exports = router;

@@ -8,6 +8,20 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors, handleSpotValidationErrors } = require('../../utils/validation');
 
+const validateReview = [
+    check("review")
+        .exists({ checkFalsy: true })
+        .withMessage("Review text is required")
+    ,
+    check("stars")
+        .exists({ checkFalsy: true })
+        .withMessage("Stars must be an integer from 1 to 5")
+        .isInt({max: 5, min: 0})
+        .withMessage("Stars must be an integer from 1 to 5")
+    ,
+    handleSpotValidationErrors
+  ]
+
 //Get all Reviews of current user
 router.get(
     '/current',
@@ -72,12 +86,41 @@ router.get(
                 delete newReviewImage.dataValues.updatedAt;
                 delete newReviewImage.dataValues.createdAt;
                 return res.json(newReviewImage)
+            }      
+        }
+    );
+
+
+    //Edit a review
+    router.put(
+        '/:reviewId',
+        requireAuth,
+        validateReview,
+        async (req, res) => {
+            const currentUserId = req.user.id;
+            const reviewId = req.params.reviewId;
+            const reviews = await Review.findByPk(reviewId);
+            const {id, userId, spotId, review, stars, createdAt, updatedAt} = req.body;
+
+            if (!reviews) {
+                res.status(404).json({message: "Review couldn't be found"})
             }
             
-            
+            if (reviews.dataValues.userId === currentUserId) {
+                reviews.set({
+                    id: id,
+                    userId: userId,
+                    spotId: spotId,
+                    review: review,
+                    stars: stars,
+                    createdAt: createdAt,
+                    updatedAt: updatedAt
+                });
+                return res.json(reviews)
+            }
+            return res.json({message: "Not the correct user"})
         }
     )
-
 
     
 

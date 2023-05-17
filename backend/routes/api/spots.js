@@ -35,7 +35,7 @@ const validateCreateSpot = [
   ,
   check("name")
       .exists({ checkFalsy: true })
-      .withMessage("Name is required")
+      .withMessage("Name must be less than 50 characters")
       .isLength({ max: 50 })
       .withMessage("Name must be less than 50 characters")
   ,
@@ -151,11 +151,8 @@ const validateCreateSpot = [
       ]
     });
 
-    if (!spots) {
-      res.status(404).json({message: "Spot couldn't be found"})
-    }
-    
-    spots.dataValues.numReviews = spots.dataValues.Reviews.length;
+    if (spots) {
+      spots.dataValues.numReviews = spots.dataValues.Reviews.length;
     let sum = 0
     let avg = 0
     let reviewsArr = spots.dataValues.Reviews
@@ -168,7 +165,11 @@ const validateCreateSpot = [
     spots.dataValues.avgStar = avg
     delete spots.dataValues.Reviews;
     return res.json(spots)
-  })
+    }
+    else {
+      res.status(404).json({message: "Spot couldn't be found"})
+    }
+  });
 
   //Create new post
   router.post(
@@ -208,25 +209,55 @@ const validateCreateSpot = [
     }
   ); 
 
+  //edit a spot
+    router.put(
+      '/:spotId',
+      requireAuth,
+      validateCreateSpot,
+      async (req, res) => {
+        const spotId = req.params.spotId;
+        const ownerId = req.user.id;
+        const spot = await Spot.findByPk(spotId);
+        const { address, city, country, lat, lng, name, description, price } = req.body
+        
+        if (spot.ownerId === ownerId) {
+          spot.set({
+            address: address,
+            city: city,
+            country: country,
+            lat: lat,
+            lng: lng,
+            name: name,
+            description: description,
+            price: price
+          })
+          res.json(spot)
+        }
+        else {
+          res.status(404).json({message: "Spot couldn't be found"})
+        }
+        return;
+      }
+    );
+
 
   //delete a spot
-  // router.delete('/:spotId', requireAuth, async(req,res,next)=>{
-  //   const spotId = req.params.spotId;
-  //   const spot = await Spot.findByPk(spotId);
+  router.delete(
+    '/:spotId', 
+    requireAuth, 
+    async (req, res) => {
+      const spotId = req.params.spotId;
+      const spot = await Spot.findByPk(spotId);
 
-  //   if(spot){
-  //     spot.destroy();
-
-  //     res.json({
-  //         message: "Successfully deleted"
-  //       })
-  //   }else{
-  //     res.status(404);
-  //     res.json({
-  //         message: "Spot couldn't be found"
-  //     })
-  //   }
-  // })
+      if(spot) {
+        spot.destroy();
+        res.json({ message: "Successfully deleted"})
+      } else {
+          res.status(404);
+          res.json({ message: "Spot couldn't be found"})
+      }
+    }
+  )
 
 
 module.exports = router;

@@ -217,6 +217,9 @@ const validateDuplicateReview = [
       }  
       if (spot.ownerId === req.user.id) {
         const newUrl = await SpotImage.create({spotId, url, preview})
+        delete newUrl.dataValues.spotId
+        delete newUrl.dataValues.updatedAt
+        delete newUrl.dataValues.createdAt
         return res.json(newUrl)
       }
       return;

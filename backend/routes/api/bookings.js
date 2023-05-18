@@ -112,7 +112,37 @@ router.put(
     }
 );
 
+// delete an existing booking
 
+router.delete(
+    '/:bookingId',
+    requireAuth,
+    async (req, res) => {
+        const currentUser = req.user.id;
+        const bookingId = req.params.bookingId;
+        const booking = await Booking.findByPk(bookingId, {
+            where: {
+                userId: currentUser
+            },
+            include: [{model: Spot}]
+        });
+        
+        if (!booking) {
+            res.status(404).json({message: "Booking couldn't be found"})
+        }
+        startDate = new Date(booking.dataValues.startDate)
+        endDate = new Date(booking.dataValues.endDate)
+        if (startDate < new Date() && endDate > new Date()) {
+            res.status(403).json({message: "Bookings that have been started can't be deleted"})
+        }
+
+        const ownerId = booking.dataValues.Spot.dataValues.ownerId;
+        if (booking.dataValues.userId === currentUser || ownerId === currentUser) {
+            booking.destroy();
+            res.json({message: "Successfully deleted"})
+        }  
+    }
+);
 
 
 

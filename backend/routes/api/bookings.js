@@ -38,7 +38,15 @@ router.get(
     }
 )
 
-// get all bookings for spot based on spot id
+// update existing booking
+
+router.put(
+    '/:bookingId',
+    requireAuth,
+    async (req, res) => {
+        
+    }
+);
 
 
 

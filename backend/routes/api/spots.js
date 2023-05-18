@@ -354,21 +354,33 @@ const validateDuplicateReview = [
           res.status(404).json({message: "Spot couldn't be found"})
         }
         const bookings = spot.dataValues.Bookings
+        console.log(bookings)
         const spotOwnerId = spot.dataValues.ownerId;
         const user = spot.dataValues.User;
         if (ownerId === spotOwnerId) {
           bookings.push({"User": user})
-          res.json({bookings})
+          res.json({"Bookings": bookings})
+        } else {
+          for (let i = 0; i < bookings.length; i++) {
+            delete bookings[i].dataValues.id;
+            delete bookings[i].dataValues.userId;
+            delete bookings[i].dataValues.createdAt;
+            delete bookings[i].dataValues.updatedAt;
+          }         
+          res.json({"Bookings": bookings})
         }
-        for (let i = 0; i < bookings.length; i++) {
-          delete bookings[i].dataValues.id;
-          delete bookings[i].dataValues.userId;
-          delete bookings[i].dataValues.createdAt;
-          delete bookings[i].dataValues.updatedAt;
-        }
-        
-        res.json({bookings})
       }
     );
+
+
+    //create a booking from a spot based on spot id
+      // spotId -> spot -> userId !== current user
+    // router.post(
+    //   '/:spotId/bookings',
+    //   requireAuth,
+    //   async (req, res) => {
+    //     res.json({message: "e"})
+    //   }
+    // );
 
 module.exports = router;

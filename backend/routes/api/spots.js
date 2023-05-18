@@ -342,7 +342,7 @@ const validateDuplicateReview = [
       requireAuth,
       async (req,res) => {
         const spotId = req.params.spotId;
-        const ownerId = req.user.id; //userid === spot userId
+        const ownerId = req.user.id; 
         
         const spot = await Spot.findByPk(spotId, {
           include: [
@@ -372,15 +372,34 @@ const validateDuplicateReview = [
       }
     );
 
-
-    //create a booking from a spot based on spot id
-      // spotId -> spot -> userId !== current user
-    // router.post(
-    //   '/:spotId/bookings',
-    //   requireAuth,
-    //   async (req, res) => {
-    //     res.json({message: "e"})
-    //   }
-    // );
+    // create a booking from a spot based on spot id    
+    router.post(
+      '/:spotId/bookings',
+      requireAuth,
+      async (req, res) => {
+        const spotId = req.params.spotId;
+        const currentUser = req.user.id;
+        const { startDate, endDate } = req.body;
+        const spot = await Spot.findByPk(spotId, {
+          attributes: ['ownerId'],
+        });
+        if (!spot) {
+          res.status(404).json({message: "Spot couldn't be found"})
+        }
+        const ownerId = spot.dataValues.ownerId;
+        if (ownerId === currentUser) {
+          const newBooking = await Booking.create({
+            spotId: Number(spotId),
+            userId: currentUser,
+            startDate: startDate,
+            endDate: endDate
+          })
+          res.json(newBooking)
+        }
+        
+        
+        
+      }
+    );
 
 module.exports = router;

@@ -383,6 +383,7 @@ const validateBooking = [
       }
     );
     
+    //create booking based on spot id
     router.post('/:spotId/bookings', requireAuth, async (req, res) => {
       const spotId = req.params.spotId;
       const currentUser = req.user.id;
@@ -428,7 +429,7 @@ const validateBooking = [
       }
     
       const ownerId = spot.dataValues.ownerId;
-      if (ownerId === currentUser) {
+      if (ownerId !== currentUser) {
         const newBooking = await Booking.create({
           spotId: Number(spotId),
           userId: currentUser,
@@ -439,15 +440,5 @@ const validateBooking = [
       }
     });
     
-    
-    
-    
-    
-    
-
-
-
-
-
-
+   
 module.exports = router;

@@ -7,6 +7,8 @@ const router = express.Router();
 
 const { check } = require('express-validator');
 const { handleValidationErrors, handleSpotValidationErrors } = require('../../utils/validation');
+const { Op } = require('sequelize');
+
 
 // get all current user bookings
 router.get(
@@ -36,7 +38,7 @@ router.get(
             res.json({bookings})
         }
     }
-)
+);
 
 // update existing booking
 
@@ -44,7 +46,69 @@ router.put(
     '/:bookingId',
     requireAuth,
     async (req, res) => {
+        const currentUserId = req.user.id;
+        const bookingId = req.params.bookingId;
+        let {id, userId, spotId, startDate, endDate, createdAt, updatedAt } = req.body;
+        const booking = await Booking.findByPk(bookingId, {
+            where: {
+                userId: currentUserId
+            }
+        });
         
+        if (!booking) {
+            res.status(404).json({message: "Booking couldn't be found"})
+        }
+
+        if (startDate >= endDate) {
+            return res.status(400).json({
+              message: "Bad Request",
+              errors: {
+                endDate: "endDate cannot be on or before startDate"
+              }
+            });
+          }
+
+          startDate = new Date(startDate);
+          endDate = new Date(endDate);
+          currentStartDate = booking.dataValues.startDate;
+          currentEndDate = booking.dataValues.endDate;
+          currentStartDate = new Date(currentStartDate);
+          currentEndDate = new Date(currentEndDate);
+
+          if (currentEndDate < new Date()) {
+            res.json({message: "Past bookings can't be modified"})
+          }    
+          
+          const getCurrentBookings = await Booking.findAll({
+        where: {
+            spotId: booking.spotId,
+            [Op.and]: [ {startDate: {[Op.lt]: endDate}}, {endDate: {[Op.gt]: startDate}} ],
+            },
+        });
+
+    if (getCurrentBookings.length) {
+        return res.status(403).json({
+            message: "Sorry, this spot is already booked for the specified dates",
+            statusCode: res.statusCode,
+            errors: {
+                startDate: "Start date conflicts with an existing booking",
+                endDate: "End date conflicts with an existing booking"
+            }
+        })
+    };
+
+        if (currentUserId === booking.dataValues.userId) {
+            updatedBooking = booking.set({
+                id: id,
+                spotId: spotId,
+                userId: userId,
+                startDate: startDate,
+                endDate: endDate,
+                createdAt: createdAt,
+                updatedAt: updatedAt
+            })
+            res.json(updatedBooking)
+        }
     }
 );
 

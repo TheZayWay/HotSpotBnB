@@ -38,6 +38,9 @@ router.get(
     }
 )
 
+// get all bookings for spot based on spot id
+
+
 
 
 

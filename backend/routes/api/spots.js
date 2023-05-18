@@ -2,7 +2,7 @@ const express = require('express')
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, Review, SpotImage, User, ReviewImage } = require('../../db/models');
+const { Spot, Review, SpotImage, User, ReviewImage, Booking } = require('../../db/models');
 const router = express.Router();
 
 const { check } = require('express-validator');
@@ -276,6 +276,9 @@ const validateDuplicateReview = [
     }
   )
 
+//NON SPOT ROUTES WITH SPOT URLS
+
+
     //Return all reviews that belong to a spot specified by id
     
     router.get(
@@ -332,5 +335,40 @@ const validateDuplicateReview = [
         res.status(201).json(newReview)
       }
     )
+
+    // get all bookings for spot based on spot id
+    router.get(
+      '/:spotId/bookings',
+      requireAuth,
+      async (req,res) => {
+        const spotId = req.params.spotId;
+        const ownerId = req.user.id; //userid === spot userId
+        
+        const spot = await Spot.findByPk(spotId, {
+          include: [
+            {model: User, attributes: ['id', 'firstName', 'lastName']},
+            {model: Booking}
+          ]
+        })
+        if (!spot) {
+          res.status(404).json({message: "Spot couldn't be found"})
+        }
+        const bookings = spot.dataValues.Bookings
+        const spotOwnerId = spot.dataValues.ownerId;
+        const user = spot.dataValues.User;
+        if (ownerId === spotOwnerId) {
+          bookings.push({"User": user})
+          res.json({bookings})
+        }
+        for (let i = 0; i < bookings.length; i++) {
+          delete bookings[i].dataValues.id;
+          delete bookings[i].dataValues.userId;
+          delete bookings[i].dataValues.createdAt;
+          delete bookings[i].dataValues.updatedAt;
+        }
+        
+        res.json({bookings})
+      }
+    );
 
 module.exports = router;

@@ -64,6 +64,14 @@ const validateDuplicateReview = [
   handleSpotValidationErrors
 ]
 
+const validateBooking = [
+  check("endDate")
+    .exists({ checkFalsy: true})
+    .isAfter()
+    .withMessage("endDate cannot be on or before startDate")
+]
+
+
   // Returns all spots  
   router.get('/', async (req, res) => {
     // const { Review, SpotImage } = require('../../db/models');
@@ -376,6 +384,7 @@ const validateDuplicateReview = [
     router.post(
       '/:spotId/bookings',
       requireAuth,
+      validateBooking,
       async (req, res) => {
         const spotId = req.params.spotId;
         const currentUser = req.user.id;
@@ -387,7 +396,7 @@ const validateDuplicateReview = [
           res.status(404).json({message: "Spot couldn't be found"})
         }
         const ownerId = spot.dataValues.ownerId;
-        if (ownerId === currentUser) {
+        if (ownerId !== currentUser) {
           const newBooking = await Booking.create({
             spotId: Number(spotId),
             userId: currentUser,

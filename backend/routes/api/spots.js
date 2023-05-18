@@ -74,16 +74,99 @@ const validateBooking = [
     handleSpotValidationErrors
 ]
 
+const validateQuery = [
+  check("page")
+      .optional()
+      .isInt({min:1})
+      .withMessage("Page must be greater than or equal to 1")
+  ,
+  check("size")
+      .optional()
+      .isInt({min:1})
+      .withMessage("Size must be greater than or equal to 1")
+  ,
+  check("minLat")
+      .optional()
+      .isDecimal()
+      .withMessage("Minimum latitude is invalid")
+  ,
+  check("maxLat")
+      .optional()
+      .isDecimal()
+      .withMessage("Maximum latitude is invalid")
+  ,
+  check("minLng")
+      .optional()
+      .isDecimal()
+      .withMessage("Minimum longitude is invalid")
+  ,
+  check("maxLng")
+      .optional()
+      .isDecimal()
+      .withMessage("Maximum longitude is invalid")
+  ,
+  check("minPrice")
+      .optional()
+      .isFloat({min: 0})
+      .withMessage("Minimum price must be greater than or equal to 0")
+  ,
+  check("maxPrice")
+      .optional()
+      .isFloat({min: 0})
+      .withMessage("Maximum price must be greater than or equal to 0")
+  ,
+  handleSpotValidationErrors
+]
+
 
   // Returns all spots  
-  router.get('/', async (req, res) => {
+  router.get('/', validateQuery, async (req, res) => {
     // const { Review, SpotImage } = require('../../db/models');
-    
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    let pagination = {};
+
+    page = +page;
+    size = +size;
+
+    if (!page) page = 1;
+    if (!size) size = 20;
+    if (page > 10) page = 10;
+    if (size > 20) size = 20;
+
+    if (page >= 1 && size >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    }
+
+    let where = {};
+
+    if (minLat) where.lat = {[Op.gte]: parseFloat(minLat)};
+
+    if (maxLat) where.lat = {[Op.lte]: parseFloat(maxLat)};
+
+    if (minLat && maxLat) where.lat = {[Op.between]: [parseFloat(minLat),parseFloat(maxLat)]};
+
+    if (minLng) where.lng = {[Op.gte]: parseFloat(minLng)};
+
+    if (maxLng) where.lng = {[Op.lte]: parseFloat(maxLng)};
+
+    if (minLng && maxLng) where.lng = {[Op.between]: [parseFloat(minLng), parseFloat(maxLng)]};
+
+    if (minPrice) where.price = {[Op.gte]: parseFloat(minPrice)};
+
+    if (maxPrice) where.price = {[Op.lte]: parseFloat(maxPrice)};
+
+    if (minPrice && maxPrice) where.price = {[Op.between]: [parseFloat(minPrice), parseFloat(maxPrice)]};
+
+
     const spots = await Spot.findAll({
+      where,
       include: [
         {model: SpotImage},
         {model: Review}
-      ]
+      ],
+      ...pagination
     });
 
     let spotsList = [];
@@ -111,9 +194,11 @@ const validateBooking = [
       
       delete spot.Reviews;
       delete spot.SpotImages;
-    })  
-    return res.json({spotsList})
+    })
+      
+    return res.json({Spots: spotsList, page: page, size: size})
   });
+
   
   //Get all Spots owned by the Current User
   router.get(

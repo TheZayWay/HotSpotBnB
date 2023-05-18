@@ -244,7 +244,7 @@ const validateQuery = [
       delete spot.Reviews;
       delete spot.SpotImages;
     })  
-    return res.json({spotsList}) 
+    return res.json({Spots: spotsList}) 
   
   });
 

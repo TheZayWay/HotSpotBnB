@@ -57,7 +57,7 @@ router.get(
             return review;
           });
           delete reviews[0].dataValues.Spot.dataValues.SpotImages;
-        return res.json({reviews})
+        return res.json({Reviews: reviews})
     });
 
     //Add an Image to Review based on Reviews Id

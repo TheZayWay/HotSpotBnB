@@ -35,7 +35,7 @@ router.get(
              
             spot.previewImage = url
             delete bookings[0].dataValues.Spot.dataValues.SpotImages
-            res.json({bookings})
+            res.json({Bookings: bookings})
         }
     }
 );

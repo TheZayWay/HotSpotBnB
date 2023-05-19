@@ -129,8 +129,7 @@ router.get(
         requireAuth, 
         async (req, res) => {
           const reviewId = req.params.reviewId;
-          const review = await Spot.findByPk(reviewId);
-    
+          const review = await Review.findByPk(reviewId);
           if(review) {
             review.destroy();
             res.json({ message: "Successfully deleted"})

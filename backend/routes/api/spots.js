@@ -525,9 +525,11 @@ const validateQuery = [
           startDate: startDate,
           endDate: endDate
         });
-        res.json(newBooking);
+        res.status(201).json(newBooking);
+      }
+      else {
+        res.status(403).json({message: "Owner cannot create a booking"})
       }
     });
     
-   
 module.exports = router;

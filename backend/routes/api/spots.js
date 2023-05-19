@@ -393,8 +393,11 @@ const validateQuery = [
             }
           ]
         });
+        if (!spots) {
+          res.status(404).json({message: "Spot couldn't be found"})
+        }
         reviews = spots.dataValues;       
-        res.json(reviews)
+        res.json(reviews);
       }
     );
 

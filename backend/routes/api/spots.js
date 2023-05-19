@@ -360,16 +360,16 @@ const validateQuery = [
     '/:spotId', 
     requireAuth, 
     async (req, res) => {
+      let userId = req.user.id;
       const spotId = req.params.spotId;
-      const spot = await Spot.findByPk(spotId);
-
-      if(spot) {
+      const spot = await Spot.findByPk(spotId);     
+      if (!spot) {
+          res.status(404).json({ message: "Spot couldn't be found"});
+      }
+      if (spot.ownerId === userId) {
         spot.destroy();
         res.json({ message: "Successfully deleted"})
-      } else {
-          res.status(404);
-          res.json({ message: "Spot couldn't be found"})
-      }
+      } 
     }
   )
 

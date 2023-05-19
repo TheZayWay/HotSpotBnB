@@ -15,15 +15,17 @@ router.delete(
     async (req,res) => {
         const currentUser = req.user.id;
         const reviewImageId = req.params.imageId;
+        console.log(reviewImageId)
         
         const reviewImage = await ReviewImage.findByPk(reviewImageId,{
             include: [{
                 model: Review,
                 where: {
-                    ownerId: currentUser
+                    userId: currentUser
                 }
             }]
         });
+
         if (!reviewImage) {
             res.status(404).json({message: "Review Image couldn't be found"})
         } else {

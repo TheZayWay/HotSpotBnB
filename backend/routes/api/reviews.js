@@ -101,7 +101,7 @@ router.get(
             const reviewId = req.params.reviewId;
             const reviews = await Review.findByPk(reviewId);
             const {id, userId, spotId, review, stars, createdAt, updatedAt} = req.body;
-
+            console.log(reviews)
             if (!reviews) {
                 res.status(404).json({message: "Review couldn't be found"})
             }
@@ -109,8 +109,8 @@ router.get(
             if (reviews.dataValues.userId === currentUserId) {
                 reviews.set({
                     id: id,
-                    userId: userId,
-                    spotId: spotId,
+                    userId: reviews.userId,
+                    spotId: reviews.spotId,
                     review: review,
                     stars: stars,
                     createdAt: createdAt,

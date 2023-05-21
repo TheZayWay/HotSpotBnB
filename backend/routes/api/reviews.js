@@ -43,21 +43,25 @@ router.get(
                 {model: ReviewImage, attributes: ["id", "url"]}           
             ]
         });
-       
-        const mappedReviews = reviews.map(review => {
-            const spot = review.Spot;
-            const spotImages = spot.SpotImages;
-          
-            if (spotImages && spotImages.length > 0) {
-              spot.dataValues.previewImage = spotImages[0].url;
-            } else {
-              spot.dataValues.previewImage = null;
-            }
-          
-            return review;
-          });
-          delete reviews[0].dataValues.Spot.dataValues.SpotImages;
+        
+        if (reviews.length > 0) {
+            const mappedReviews = reviews.map(review => {
+                const spot = review.Spot;
+                const spotImages = spot.SpotImages;
+              
+                if (spotImages && spotImages.length > 0) {
+                  spot.dataValues.previewImage = spotImages[0].url;
+                } else {
+                  spot.dataValues.previewImage = null;
+                }
+              
+                return review;
+              });
+              delete reviews[0].dataValues.Spot.dataValues.SpotImages;
         return res.json({Reviews: reviews})
+        }
+        return res.json({Reviews: reviews})
+          
     });
 
     //Add an Image to Review based on Reviews Id

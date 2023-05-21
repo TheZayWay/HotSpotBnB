@@ -350,6 +350,9 @@ const validateQuery = [
           })
           res.json(spot)
         }
+        else {
+          res.status(403).json({message: "Spot must belong to current user."})
+        }
         
       }
     );

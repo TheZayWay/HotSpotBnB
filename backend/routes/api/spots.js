@@ -372,6 +372,9 @@ const validateQuery = [
       if (spot.ownerId === userId) {
         spot.destroy();
         res.json({ message: "Successfully deleted"})
+      }
+      else {
+        res.status(403).json({message: "Spot must belong to current user"})
       } 
     }
   )

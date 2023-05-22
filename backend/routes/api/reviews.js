@@ -66,91 +66,34 @@ router.get(
 
     //Add an Image to Review based on Reviews Id
 
-    // router.post(
-    //     '/:reviewId/images',
-    //     requireAuth,
-    //     async (req, res) => {
-    //         const reviewId = req.params.reviewId;
-    //         const userId = req.user.id;
-    //         const { url } = req.body;
-    //         const review = await Review.findByPk(reviewId, {
-    //             where: {
-    //                 userId: userId
-    //             }
-    //         })
-    //         if (!review) {
-    //             res.status(404).json({message: "Review couldn't be found"})
-    //         }
-    //         const reviewImages = await ReviewImage.findAll();
-    //         if (reviewImages.length > 10) {
-    //             res.status(403).json({message: "Maximum number of images for this resource was reached"})
-    //         } else {
-    //             const newReviewImage = await ReviewImage.create({reviewId, url });
-    //             delete newReviewImage.dataValues.reviewId;
-    //             delete newReviewImage.dataValues.updatedAt;
-    //             delete newReviewImage.dataValues.createdAt;
-    //             return res.json(newReviewImage)
-    //         }      
-    //     }
-    // );
-    router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
-        let user = req.user;
-    
-        const { url } = req.body;
-    
-        const { reviewId } = req.params;
-    
-        let findReview = await Review.findOne({
-            where: {
-                id: reviewId,
-                // userId: user.id
-            },
-            include: [
-                {
-                    model: ReviewImage
+    router.post(
+        '/:reviewId/images',
+        requireAuth,
+        async (req, res) => {
+            const reviewId = req.params.reviewId;
+            const userId = req.user.id;
+            const { url } = req.body;
+            const review = await Review.findByPk(reviewId, {
+                where: {
+                    userId: userId
                 }
-            ]
-        });
-    
-        if (!findReview) {
-            return res.status(404).json({
-                message: "Review couldn't be found",
-                statusCode: res.statusCode
-            });
-        };
-    
-        if (findReview.userId !== user.id) {
-            return res.status(403).json({
-                message: "Forbidden",
-                statusCode: res.statusCode
             })
+            if (!review) {
+                res.status(404).json({message: "Review couldn't be found"})
+            }
+            const reviewImages = await ReviewImage.findAll();
+            if (reviewImages.length > 10) {
+                res.status(403).json({message: "Maximum number of images for this resource was reached"})
+            } else {
+                const newReviewImage = await ReviewImage.create({reviewId, url });
+                delete newReviewImage.dataValues.reviewId;
+                delete newReviewImage.dataValues.updatedAt;
+                delete newReviewImage.dataValues.createdAt;
+                return res.json(newReviewImage)
+            }      
         }
-    
-        if (findReview.ReviewImages.length >= 10) {
-            return res.status(403).json({
-                message: "Maximum number of images for this resource was reached",
-                statusCode: res.statusCode
-            });
-        };
-    
-        if (findReview) {
-            if (!url.length) {
-                return res.status(400).json({
-                    message: "A url is required to add an image",
-                    statusCode: res.statusCode
-            })
-        }
-            const createReviewImage = await ReviewImage.create({
-                reviewId: reviewId,
-                url
-            });
-    
-            return res.status(200).json({
-                id: createReviewImage.id,
-                url: createReviewImage.url
-            });
-        }
-    })
+    );
+
 
     //Edit a review
     router.put(

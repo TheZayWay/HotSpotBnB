@@ -82,7 +82,7 @@ router.get(
                 res.status(404).json({message: "Review couldn't be found"})
             }
             const reviewImages = await ReviewImage.findAll();
-            if (reviewImages.length > 10) {
+            if (reviewImages.length >= 10) {
                 res.status(403).json({message: "Maximum number of images for this resource was reached"})
             } else {
                 const newReviewImage = await ReviewImage.create({reviewId, url });

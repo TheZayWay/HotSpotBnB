@@ -27,24 +27,16 @@ router.get(
                 }           
             ]
         });
-        
-        if (bookings.length > 0) {
-            const bookingUserId = bookings[0].dataValues.userId;
-            const spotImages = bookings[0].dataValues.Spot.dataValues.SpotImages;
-            if (userId === bookingUserId) {
-                if (spotImages.length > 0) {
-                    url = bookings[0].dataValues.Spot.dataValues.SpotImages[0].url
-                }
-                let spot = bookings[0].dataValues.Spot.dataValues
-                spot.previewImage = url
-                delete bookings[0].dataValues.Spot.dataValues.SpotImages
-                res.json({Bookings: bookings})
-            }
-        } else {
+
+        const bookingUserId = bookings[0].dataValues.userId;
+        if (userId === bookingUserId) {
+            let url = bookings[0].dataValues.Spot.dataValues.SpotImages[0].url
+            let spot = bookings[0].dataValues.Spot.dataValues
+             
+            spot.previewImage = url
+            delete bookings[0].dataValues.Spot.dataValues.SpotImages
             res.json({Bookings: bookings})
         }
-        
-        
     }
 );
 

@@ -205,7 +205,6 @@ const validateQuery = [
    '/current',
    requireAuth,
    async (req,res) => {
-    // const { Review, SpotImage } = require('../../db/models');
     const ownerId = req.user.id;
     const spots = await Spot.findAll({
       where: {

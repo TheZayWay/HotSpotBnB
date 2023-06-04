@@ -1,4 +1,12 @@
 import { csrfFetch } from "./csrf";
 
+//start with making the actions 
 
-export default reviewReducer
+
+
+
+// const reviewReducer = () => {
+    
+// }
+
+// export default reviewReducer

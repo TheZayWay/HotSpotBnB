@@ -56,14 +56,14 @@ const loadDeleteSpot = (spotId) => {
 
 export const loadAllSpotsThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/spots');
-
+    console.log('Dispatching fetchData action');
     if (response.ok) {
         const spots = await response.json();
-        console.log(spots)
-        console.log(spots)
+        console.log('Dispatching fetchData action');
         dispatch(loadAllSpots(spots));
         return spots;
     }
+    console.log('Dispatching fetchData action');
 };
 loadAllSpotsThunk()
 

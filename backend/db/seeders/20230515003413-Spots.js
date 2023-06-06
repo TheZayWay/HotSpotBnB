@@ -12,15 +12,15 @@ module.exports = {
    await queryInterface.bulkInsert(options, [
     {
       ownerId: 1,
-      address: "123 Disney Lane",
+      address: "123 25th ave",
       city: "San Francisco",
       state: "California",
       country: "United States of America",
       lat: 37.7645358,
       lng: -122.4730327,
-      name: "App Academy",
-      description: "Place where web developers are created",
-      price: 123
+      name: "Mega Mansion",
+      description: "Truly a get away.",
+      price: 350
     },
     {
       ownerId: 1,
@@ -30,9 +30,9 @@ module.exports = {
       country: "United States of America",
       lat: 50.765358,
       lng: -102.4330327,
-      name: "Chase",
-      description: "The best big bank",
-      price: 400
+      name: "The Modern Home",
+      description: "Relaxation purposes only.",
+      price: 300
     }
    ])
   },

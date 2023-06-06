@@ -7,6 +7,7 @@ import Spots from './components/Spots/index'
 import SpotDetails from "./components/Spots/SpotDetails/SpotDetails";
 
 function App() {
+  document.title = "HotSpot-Bnb";
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {

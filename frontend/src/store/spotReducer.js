@@ -90,35 +90,35 @@ export const loadSpotIdThunk = (spotId) => async (dispatch) => {
     }
 };
 
-// export const loadCreateSpotThunk = (spot) => async (dispatch) => {
-//     const {address, city, state, country, name, description, price, url} = spot
-//     const response = await csrfFetch('/api/spots', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({address, city, state, country, name, description, price})
-//     });
+export const loadCreateSpotThunk = (spot) => async (dispatch) => {
+    const {address, city, state, country, name, description, price, url} = spot
+    const response = await csrfFetch('/api/spots', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({address, city, state, country, name, description, price})
+    });
 
-//     if (response.ok) {
-//         const createdSpot = await response.json();
-//         const imageResponse = await csrfFetch(`/api/spots/${createdSpot.id}/images`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({url})
-//         });
+    if (response.ok) {
+        const createdSpot = await response.json();
+        const imageResponse = await csrfFetch(`/api/spots/${createdSpot.id}/images`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({url})
+        });
         
-//         if (imageResponse.ok) {
-//             createdSpot.previewImage = url;
-//             dispatch(loadCreateSpot(createdSpot));
-//             return createdSpot;
-//         }
-//     }
+        if (imageResponse.ok) {
+            createdSpot.previewImage = url;
+            dispatch(loadCreateSpot(createdSpot));
+            return createdSpot;
+        }
+    }
 
     
-// };
+};
 
 // // EDIT A SPOT --- /api/spots/:spotId
 // export const loadEditSpotThunk = (spot, id) => async (dispatch) => {

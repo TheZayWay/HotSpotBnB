@@ -2,11 +2,13 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom"
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -27,6 +29,7 @@ function LoginFormModal() {
 
   return (
     <>
+      
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -61,6 +64,7 @@ function LoginFormModal() {
           Demo User 
         </button>
       </form>
+      
     </>
   );
 }

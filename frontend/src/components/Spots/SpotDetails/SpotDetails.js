@@ -12,7 +12,7 @@ export default function SpotDetails() {
     const image = spotData?.SpotImages?.[0]?.url;
     const user = spotData?.User
     
-    if (spotData.avgStar === null) { spotData.avgStar = "new"}
+    if (spotData?.avgStar === null) spotData.avgStar = "new"
 
     useEffect(() => {
       dispatch(loadSpotIdThunk(spotId));

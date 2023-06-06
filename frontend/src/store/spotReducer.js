@@ -79,16 +79,16 @@ export const loadAllSpotsThunk = () => async (dispatch) => {
     
 // };
 
-// export const loadSpotIdThunk = (spotId) => async (dispatch) => {
-//     const response = await csrfFetch(`/api/spots/${spotId}`);
+export const loadSpotIdThunk = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`);
     
-//     if (response.ok) {
-//         const spot = await response.json();
+    if (response.ok) {
+        const spot = await response.json();
 
-//         dispatch(loadSpotId(spot));
-//         return spot;
-//     }
-// };
+        dispatch(loadSpotId(spot));
+        return spot;
+    }
+};
 
 // export const loadCreateSpotThunk = (spot) => async (dispatch) => {
 //     const {address, city, state, country, name, description, price, url} = spot
@@ -163,11 +163,11 @@ const spotReducer = (state = initialState, action) => {
         //     action.spots.Spots?.forEach(spot => newState[spot.id] = spot)
         //     return newState
         // }
-        // case GET_SPOT_ID: {
-        //     const newState = {...state};
-        //     newState[action.spot.id] = action.spot;
-        //     return newState;
-        // }
+        case GET_SPOT_ID: {
+            const newState = {...state};
+            newState[action.spot.id] = action.spot;
+            return newState;
+        }
         // case CREATE_SPOT: {
         //     const newState = {...state};
         //     newState[action.spot.id] = action.spot;

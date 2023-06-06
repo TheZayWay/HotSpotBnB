@@ -4,11 +4,12 @@ import { loadAllSpotsThunk } from "../../../store/spotReducer";
 import { Link } from 'react-router-dom';
 import './SpotCards.css'
 
+
 export default function SpotCards () {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state.spot);
     const spotsArr = Object.values(spots);
-    console.log("spotsimageurl:", spotsArr)
+    
     useEffect(() => {
         dispatch(loadAllSpotsThunk())
     }, [dispatch])

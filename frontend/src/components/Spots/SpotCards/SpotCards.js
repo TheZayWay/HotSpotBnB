@@ -4,29 +4,37 @@ import { loadAllSpotsThunk } from "../../../store/spotReducer";
 import { Link } from 'react-router-dom';
 import './SpotCards.css'
 
-
-export default function SpotCards () {
+export default function SpotCards() {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state.spot);
     const spotsArr = Object.values(spots);
-    
+  
     useEffect(() => {
-        dispatch(loadAllSpotsThunk())
-    }, [dispatch])
-    
+      dispatch(loadAllSpotsThunk());
+    }, [dispatch]);
+  
+    console.log("spotsArr:", spotsArr);
+
     return (
-        <div className="card-container">
-            {spotsArr.map((spot) => 
-            <div className="card">
-            <Link className='cards' to={`/spots/${spot.id}`}>{spot.previewImage}</Link>
-            {/* going to put link into img */}
-            <img></img>
-            <div className="under-image">
-                {spot.city},{spot.state} {spot.avgRating} #.# 
+      <div className="card-container">
+        {spotsArr.map((spot) => {
+          console.log("spot:", spot);
+          if (!spot || !spot.id || !spot.previewImage) {
+            return null;
+          }
+  
+          return (
+            <div className="card" key={spot.id}>
+              <Link className="cards" to={`/spots/${spot.id}`}>
+                <img src={spot.previewImage} alt="Spot Preview" />
+              </Link>
+              <div className="under-image">
+                {spot.city}, {spot.state} {spot.avgRating} #.#
                 <div className="price-line">${spot.price} night</div>
+              </div>
             </div>
-            </div>)}
-        </div>
-        
-    )
-}
+          );
+        })}
+      </div>
+    );
+  }

@@ -8,7 +8,8 @@ export default function SpotCards() {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state.spot);
     const spotsArr = Object.values(spots);
-  
+    const star = String.fromCharCode(0x2605);
+    
     useEffect(() => {
       dispatch(loadAllSpotsThunk());
     }, [dispatch]);
@@ -30,7 +31,7 @@ export default function SpotCards() {
                   <div className="spot-location">
                   {spot.city}, {spot.state} 
                   </div>
-                  {spot.avgRating || "new"}
+                  {star}{spot.avgRating || "new"}
                 </div> 
                 <div className="price-line">${spot.price} night</div>
               </div>

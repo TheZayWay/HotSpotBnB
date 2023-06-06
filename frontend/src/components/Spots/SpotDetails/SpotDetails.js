@@ -11,7 +11,7 @@ export default function SpotDetails() {
     const spotData = spot[spotId];
     const image = spotData?.SpotImages?.[0]?.url;
     const user = spotData?.User
-    console.log("spotDaata:", spotData)
+    
     if (spotData.avgStar === null) { spotData.avgStar = "new"}
 
     useEffect(() => {

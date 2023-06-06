@@ -1,13 +1,18 @@
 .card-container {
-    /* background-color: blue; */
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.under-image {
-
+.under-image-top-line {
+    display: flex;
 }
 
-.price-line {
-    /* color: yellow */
+.spot-location {
+    padding-right: 100px;
+}
+
+.cards {
+    border: 1px solid #000;
 }
 
 img {

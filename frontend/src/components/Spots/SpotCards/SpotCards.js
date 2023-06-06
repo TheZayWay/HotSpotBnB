@@ -12,7 +12,7 @@ export default function SpotCards() {
     useEffect(() => {
       dispatch(loadAllSpotsThunk());
     }, [dispatch]);
-
+    
     return (
       <div className="card-container">
         {spotsArr.map((spot) => {
@@ -26,7 +26,12 @@ export default function SpotCards() {
                 <img src={spot.previewImage} alt="Spot Preview" />
               </Link>
               <div className="under-image">
-                {spot.city}, {spot.state} {spot.avgRating} #.#
+                <div className="under-image-top-line">
+                  <div className="spot-location">
+                  {spot.city}, {spot.state} 
+                  </div>
+                  {spot.avgRating || "new"}
+                </div> 
                 <div className="price-line">${spot.price} night</div>
               </div>
             </div>

@@ -1,8 +1,8 @@
 import { Navigation, Route } from 'react-router-dom';
 import SpotCards from "./SpotCards/SpotCards";
-
-import './index.css'
 import { useParams } from 'react-router-dom'
+import './index.css'
+
 export default function Spots () {
     return (
         <>

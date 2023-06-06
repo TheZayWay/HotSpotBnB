@@ -4,14 +4,18 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import hotSpot from './Images/hot-spot-pic.jpeg'
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <ul>
+    <ul className="header">
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <span className="site-title">HotSpotBnb</span>
+        <NavLink style={{textDecoration: 'none'}} exact to="/">
+          <img className="hot-spot" src={hotSpot} alt=""></img>
+          </NavLink>
       </li>
       {isLoaded && (
         <li>

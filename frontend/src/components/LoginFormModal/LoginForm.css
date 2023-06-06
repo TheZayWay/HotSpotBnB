@@ -1,0 +1,29 @@
+.login-title {
+    color: red;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.demo-user-button {
+    color: red;
+}
+
+.credential-input {
+    color: red;
+}
+
+.password-input {
+    color: red;
+}
+
+.login-button {
+    color: red;
+}
+
+.entire-modal {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #000000;
+    padding: 30px;
+}

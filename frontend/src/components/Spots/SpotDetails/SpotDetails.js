@@ -10,7 +10,8 @@ export default function SpotDetails() {
     const spot = useSelector((state) => state.spot);
     const spotData = spot[spotId];
     const image = spotData?.SpotImages?.[0]?.url;
-  
+    const user = spotData?.User
+    
     useEffect(() => {
       dispatch(loadSpotIdThunk(spotId));
     }, [dispatch, spotId]);
@@ -29,6 +30,22 @@ export default function SpotDetails() {
           <div className="image-container">
             {image && <img src={image} alt="Spot Image" className="spot-image" />}
           </div>
+          <div className="name-line">
+            Hosted by {user?.firstName} {user?.lastName}
+          </div>
+          <div className="bottom-row">
+            <p>details about the spot</p>
+            <div className="reserve-container">
+               <div className="reserve-top-line">
+                <div className="price">${spotData.price}night</div>
+                <div className="review-stuff">star #.# . # reviews</div>
+               </div> 
+               <div className="reserve-bottom-line">
+                <button className="reserve-button" onClick={() => (alert("Feature coming soon..."))}>Reserve</button>
+               </div>
+            </div>
+          </div>         
+          <hr></hr>
         </>
       );
     }

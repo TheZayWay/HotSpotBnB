@@ -11,7 +11,9 @@ export default function SpotDetails() {
     const spotData = spot[spotId];
     const image = spotData?.SpotImages?.[0]?.url;
     const user = spotData?.User
-    
+    console.log("spotDaata:", spotData)
+    if (spotData.avgStar === null) { spotData.avgStar = "new"}
+
     useEffect(() => {
       dispatch(loadSpotIdThunk(spotId));
     }, [dispatch, spotId]);
@@ -38,7 +40,7 @@ export default function SpotDetails() {
             <div className="reserve-container">
                <div className="reserve-top-line">
                 <div className="price">${spotData.price}night</div>
-                <div className="review-stuff">star #.# . # reviews</div>
+                <div className="review-stuff">star {spotData.avgStar} . {spotData.numReviews} reviews</div>
                </div> 
                <div className="reserve-bottom-line">
                 <button className="reserve-button" onClick={() => (alert("Feature coming soon..."))}>Reserve</button>

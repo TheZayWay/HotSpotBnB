@@ -12,13 +12,10 @@ export default function SpotCards() {
     useEffect(() => {
       dispatch(loadAllSpotsThunk());
     }, [dispatch]);
-  
-    console.log("spotsArr:", spotsArr);
 
     return (
       <div className="card-container">
         {spotsArr.map((spot) => {
-          console.log("spot:", spot);
           if (!spot || !spot.id || !spot.previewImage) {
             return null;
           }

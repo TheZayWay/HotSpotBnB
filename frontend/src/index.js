@@ -12,8 +12,17 @@ import App from "./App";
 import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
+import { loadAllSpotsThunk, loadAllSpotsUserThunk, loadSpotIdThunk, loadEditSpotThunk, loadDeleteSpotThunk } from "./store/spotReducer";
 
 const store = configureStore();
+//to test if thunks are working 
+// store.dispatch(loadAllSpotsThunk());
+// store.dispatch(loadAllSpotsUserThunk()); // if this is being called must stay logged in or will get an error
+// const spotId = 6
+// const spotId2 = 4
+// store.dispatch(loadSpotIdThunk(spotId));
+// store.dispatch(loadEditSpotThunk())
+// store.dispatch(loadDeleteSpotThunk(spotId2))
 
 if (process.env.NODE_ENV !== "production") {
   restoreCSRF();

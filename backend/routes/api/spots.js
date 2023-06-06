@@ -280,7 +280,7 @@ const validateQuery = [
     }
   });
 
-  //Create new post
+  //Create new spot
   router.post(
     '/', 
     requireAuth,

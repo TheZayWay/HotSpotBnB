@@ -26,6 +26,7 @@ export default function SpotCards() {
               <Link className="cards" to={`/spots/${spot.id}`}>
                 <img src={spot.previewImage} alt="Spot Preview" />
               </Link>
+              {console.log("spot:", spot)}
               <div className="under-image">
                 <div className="under-image-top-line">
                   <div className="spot-location">

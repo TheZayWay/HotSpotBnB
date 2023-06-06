@@ -19,6 +19,11 @@ module.exports = {
         spotId: 2,
         url: "https://img.staticmb.com/mbcontent/images/uploads/2022/12/Most-Beautiful-House-in-the-World.jpg",
         preview: true
+      },
+      {
+        spotId: 3,
+        url: "https://img.staticmb.com/mbcontent/images/uploads/2022/12/Most-Beautiful-House-in-the-World.jpg",
+        preview: true
       }
     ])
   },

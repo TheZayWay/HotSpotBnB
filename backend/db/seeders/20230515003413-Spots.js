@@ -33,6 +33,30 @@ module.exports = {
       name: "The Modern Home",
       description: "Relaxation purposes only.",
       price: 300
+    },
+    {
+      ownerId: 2,
+      address: "123 Main St",
+      city: "San Francisco",
+      state: "California",
+      country: "United States of America",
+      lat: 50.765358,
+      lng: -102.4330327,
+      name: "The Modern Home",
+      description: "Relaxation purposes only.",
+      price: 300
+    },
+    {
+      ownerId: 2,
+      address: "123 Main St",
+      city: "San Francisco",
+      state: "California",
+      country: "United States of America",
+      lat: 50.765358,
+      lng: -102.4330327,
+      name: "The Modern Home",
+      description: "Relaxation purposes only.",
+      price: 300
     }
    ])
   },

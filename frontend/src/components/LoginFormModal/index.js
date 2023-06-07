@@ -28,10 +28,9 @@ function LoginFormModal() {
   };
 
   return (
-    <div className="entire-modal">
-      
+    <div className="entire-login-modal">
       <h3 className="login-title">Log In</h3>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <label>
           <input
             type="text"

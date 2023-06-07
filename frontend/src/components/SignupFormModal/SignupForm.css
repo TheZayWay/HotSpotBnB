@@ -1,0 +1,18 @@
+.entire-signup-modal {
+    height: 300px;
+    width: 300px;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.signup-input-field {
+    width: 95%
+}
+
+.signup-button {
+    width: 98%
+}

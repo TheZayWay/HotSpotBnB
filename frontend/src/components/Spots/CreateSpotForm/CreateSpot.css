@@ -1,4 +1,25 @@
-form {
+.create-spot-form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding-left: 5%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-width: 2px;
+    width: 500px;
+    height: 500px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.input-field {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.entire-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
 }

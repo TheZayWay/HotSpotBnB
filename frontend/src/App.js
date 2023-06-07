@@ -27,6 +27,7 @@ function App() {
           <SpotDetails />
         </Route>
         <Route path='/spotss/new'>
+          {/* remember to fix link to go to /spots/new */}
             <CreateSpotForm />
         </Route>
       </Switch>}

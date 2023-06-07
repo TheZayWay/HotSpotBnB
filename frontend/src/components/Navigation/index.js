@@ -18,9 +18,10 @@ function Navigation({ isLoaded }){
     )
   } else {
     session = (
-      <div>
+      <div className="right-side-nav">
         <div>
-          <Link to="/spots/new"><button className="new-spot-button">Create a New Spot</button></Link>
+          {/* remember to fix link to go to /spots/new */}
+          <Link to="/spotss/new"><button className="new-spot-button">Create a New Spot</button></Link>
         </div>
         <div>
           <ProfileButton user={sessionUser} />
@@ -29,16 +30,15 @@ function Navigation({ isLoaded }){
     )
   }
   return (
-    <ul className="header">
-      <li className="home">
+    <div className="header">
+      <div className="home">
         <NavLink style={{textDecoration: 'none'}} exact to="/">
           <span className="site-title">HotSpotBnb</span>
           <img className="hot-spot" src={hotSpot} alt=""></img>
           </NavLink>
-          
-      </li>
+      </div>
       {isLoaded && session}
-    </ul>
+    </div>
   );
 }
 

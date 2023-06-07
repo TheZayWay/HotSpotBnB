@@ -8,7 +8,7 @@ import hotSpot from './Images/hot-spot-pic.jpeg'
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
-
+  
   return (
     <ul className="header">
       <li className="home">
@@ -16,6 +16,7 @@ function Navigation({ isLoaded }){
           <span className="site-title">HotSpotBnb</span>
           <img className="hot-spot" src={hotSpot} alt=""></img>
           </NavLink>
+          
       </li>
       {isLoaded && (
         <li>

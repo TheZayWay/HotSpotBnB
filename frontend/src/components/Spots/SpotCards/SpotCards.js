@@ -27,7 +27,6 @@ export default function SpotCards() {
                 <img src={spot.previewImage} alt="Spot Preview" />
                 
               </Link>
-              {console.log("spot:", spot)}
               <div className="under-image">
                 <div className="under-image-top-line">
                   <div className="spot-location">

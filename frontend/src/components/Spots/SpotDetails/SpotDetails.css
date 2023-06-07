@@ -1,0 +1,27 @@
+.reserve-top-line {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+}
+
+.spot-information-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.spot-name {
+    display: flex;
+    justify-content: center;
+}
+
+.spot-details {
+    display: flex;
+    justify-content: center;
+}

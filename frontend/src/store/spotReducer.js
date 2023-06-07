@@ -67,17 +67,17 @@ export const loadAllSpotsThunk = () => async (dispatch) => {
 };
 
 
-// export const loadAllSpotsUserThunk = () => async (dispatch) =>  {
-//     const response = await csrfFetch('/api/spots/current');
+export const loadAllSpotsUserThunk = () => async (dispatch) =>  {
+    const response = await csrfFetch('/api/spots/current');
 
-//     if (response.ok) {
-//         const spots = await response.json();
+    if (response.ok) {
+        const spots = await response.json();
 
-//         dispatch(loadAllSpotsUser(spots));
-//         return spots;
-//     }
+        dispatch(loadAllSpotsUser(spots));
+        return spots;
+    }
     
-// };
+};
 
 export const loadSpotIdThunk = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`);
@@ -91,33 +91,38 @@ export const loadSpotIdThunk = (spotId) => async (dispatch) => {
 };
 
 export const loadCreateSpotThunk = (spot) => async (dispatch) => {
-    const {address, city, state, country, name, description, price, url} = spot
-    const response = await csrfFetch('/api/spots', {
+      const { address, city, state, country, name, description, price, url } = spot;
+  
+      const response = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({address, city, state, country, name, description, price})
-    });
+        body: JSON.stringify({ address, city, state, country, name, description, price }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to create spot');
+      }
+  
+      const createdSpot = await response.json();
+      createdSpot.previewImage = url;
+  
+      dispatch(loadCreateSpot(createdSpot));
+  
+      const imageResponse = await csrfFetch(`/api/spots/${createdSpot.id}/images`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url }),
+      });
+  
+      if (!imageResponse.ok) {
+        throw new Error('Failed to upload image');
+      }
+      return createdSpot;
 
-    if (response.ok) {
-        const createdSpot = await response.json();
-        const imageResponse = await csrfFetch(`/api/spots/${createdSpot.id}/images`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({url})
-        });
-        
-        if (imageResponse.ok) {
-            createdSpot.previewImage = url;
-            dispatch(loadCreateSpot(createdSpot));
-            return createdSpot;
-        }
-    }
-
-    
 };
 
 // // EDIT A SPOT --- /api/spots/:spotId

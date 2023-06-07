@@ -4,6 +4,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { NavLink } from 'react-router-dom';
 import './ProfileButton.css'
 
 function ProfileButton({ user }) {
@@ -38,6 +39,10 @@ function ProfileButton({ user }) {
     closeMenu();
   };
 
+  const handleClick = () => {
+    closeMenu()
+  }
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 // 
   return (
@@ -52,6 +57,8 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
+            <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/users/${user.id}/spots`}>My Spots</NavLink></li>
+            <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/users/${user.id}/trips`}>My Trips</NavLink></li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
@@ -59,11 +66,13 @@ function ProfileButton({ user }) {
         ) : (
           <>
             <OpenModalMenuItem
+              className="login-modal"
               itemText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
             <OpenModalMenuItem
+              className="signup-modal"
               itemText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}

@@ -11,9 +11,9 @@ function Navigation({ isLoaded }){
 
   return (
     <ul className="header">
-      <li>
-        <span className="site-title">HotSpotBnb</span>
+      <li className="home">
         <NavLink style={{textDecoration: 'none'}} exact to="/">
+          <span className="site-title">HotSpotBnb</span>
           <img className="hot-spot" src={hotSpot} alt=""></img>
           </NavLink>
       </li>

@@ -9,16 +9,15 @@
 
 .menu-button {
     border-radius: 10px;
-    background-color: white;
+    background-color: lightgrey;
     display: flex;
     justify-content: space-evenly;
-    
-
-    
 }
 
 ul {
     list-style: none;
+    display: flex;
+    justify-content: space-between;
   }
   
   li {
@@ -38,4 +37,7 @@ ul {
     display: flex;
   }
 
+  .login-modal {
+    font: blue
+  }
   

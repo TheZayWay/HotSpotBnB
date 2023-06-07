@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { loadSpotIdThunk } from '../../../store/spotReducer';
 import { useDispatch, useSelector } from 'react-redux';
+import './SpotDetails.css';
 
 export default function SpotDetails() {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function SpotDetails() {
     const image = spotData?.SpotImages?.[0]?.url;
     const user = spotData?.User;
     const star = String.fromCharCode(0x2605);
+    console.log("spotData: ", spotData)
     
     if (spotData?.avgStar === null) spotData.avgStar = "new"
 
@@ -21,12 +23,15 @@ export default function SpotDetails() {
   
     if (spotId === spotData?.id) {
       return (
-        <>
+        <> 
+         {/* <div className="whole-container">
+          
+         </div>          */}
           <div className="spot-information-container">
             {spotData && (
               <>
-                <h3>{spotData.name}</h3>
-                <h5>{spotData.city}, {spotData.state}, {spotData.country}</h5>
+                <h3 className="spot-name">{spotData.name}</h3>
+                <h5 className="spot-details">{spotData.city}, {spotData.state}, {spotData.country}</h5>
               </>
             )}
           </div>
@@ -37,7 +42,7 @@ export default function SpotDetails() {
             Hosted by {user?.firstName} {user?.lastName}
           </div>
           <div className="bottom-row">
-            <p>details about the spot</p>
+            <p>{spotData.description}</p>
             <div className="reserve-container">
                <div className="reserve-top-line">
                 <div className="price">${spotData.price}night</div>
@@ -49,6 +54,14 @@ export default function SpotDetails() {
             </div>
           </div>         
           <hr></hr>
+          <p className="below-line">
+            {star} {spotData.avgStar} {spotData.numReviews}
+          </p>
+          <div className="review-section">
+            <div>FirstName</div>
+            <div>Date of Review</div>
+            <div>Comment Text</div>
+          </div>
         </>
       );
     }

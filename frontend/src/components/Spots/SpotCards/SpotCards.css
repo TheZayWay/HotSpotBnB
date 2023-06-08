@@ -1,6 +1,6 @@
 .card-image {
     height: 300px;
-    width: 300px;
+    width: 320px;
     border: 1px solid gray;
     border-radius: 15%;
 }
@@ -36,7 +36,7 @@
 
 .card-stars {
     font-size: medium;
-    padding-left: 60px; 
+    padding-left: 56px; 
 }
 
 .under-image {
@@ -51,8 +51,6 @@
 .card {
     width: calc(33.33% - 20px);
     margin: 10px;
-    
-    
 }
 
 

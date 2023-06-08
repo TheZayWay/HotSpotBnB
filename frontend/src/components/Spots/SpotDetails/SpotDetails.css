@@ -5,6 +5,14 @@
     padding-right: 30px;
 }
 
+.spot-image {
+    width: 700px;
+}
+
+.name-line {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .image-container {
     display: flex;
     justify-content: center;
@@ -16,12 +24,11 @@
     flex-direction: column;
 }
 
-.spot-name {
-    display: flex;
-    justify-content: center;
-}
 
+.spot-name,
 .spot-details {
     display: flex;
-    justify-content: center;
+    padding-left: 20%;
+    font-family: Arial, Helvetica, sans-serif;
 }
+

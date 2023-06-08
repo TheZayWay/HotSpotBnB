@@ -52,11 +52,12 @@ function ProfileButton({ user }) {
         <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
+        <div className="menu-user-items">
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
+            <li className="li-input">{user.username}</li>
+            <li className="li-input">{user.firstName} {user.lastName}</li>
+            <li className="li-input">{user.email}</li>
             <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/spots/current`}>Manage Spots</NavLink></li>
             {/* <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/users/${user.id}/trips`}>My Trips</NavLink></li> */}
             <li>
@@ -77,6 +78,7 @@ function ProfileButton({ user }) {
             />
           </>
         )}
+        </div>  
       </ul>
     </>
   );

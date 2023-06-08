@@ -33,8 +33,8 @@ function Navigation({ isLoaded }){
     <div className="header">
       <div className="home">
         <NavLink style={{textDecoration: 'none'}} exact to="/">
-          <span className="site-title">HotSpotBnb</span>
           <img className="hot-spot" src={hotSpot} alt=""></img>
+          <span className="site-title">HotSpotBnb</span>
           </NavLink>
       </div>
       {isLoaded && session}

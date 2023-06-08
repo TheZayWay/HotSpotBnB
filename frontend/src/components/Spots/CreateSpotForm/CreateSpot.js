@@ -60,7 +60,7 @@ export default function CreateSpotForm () {
     return (
        <div className="entire-create-spot-form">
         <form className="create-spot-form" onSubmit={handleSubmit}>
-        <h2>Create a Spot</h2>
+        <h2 className="create-spot-title">Create a Spot</h2>
         Street Address  
         <label>
           <input
@@ -146,9 +146,10 @@ export default function CreateSpotForm () {
                onChange={(e) => setUrl(e.target.value)}
                required
                placeholder="Preview Image URL"
+               className="input-field"
             />
         </label>
-        <button type="submit">Create Spot</button>
+        <button className="create-submit-button" type="submit">Create Spot</button>
       </form>
        </div> 
         

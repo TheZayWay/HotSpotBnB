@@ -5,7 +5,8 @@
 // export default function UpdateSpot () {
 //   const {spotId} = useParams(); 
 //   const dispatch = useDispatch();
-//   const spot = useSelector((state) => state.spot)
+//   const spot = useSelector((state) => state.spot)[spotId]
+//   console.log(spot)
 //   const history = useHistory();
 
 //   const [address, setAddress] = useState(spot.address);

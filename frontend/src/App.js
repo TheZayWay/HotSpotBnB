@@ -6,8 +6,8 @@ import Navigation from "./components/Navigation";
 import Spots from './components/Spots/index'
 import SpotDetails from "./components/Spots/SpotDetails/SpotDetails";
 import CreateSpotForm from "./components/Spots/CreateSpotForm/CreateSpot";
+import ManageSpots from "./components/Spots/ManageSpots/ManageSpots";
 import UpdateSpot from "./components/Spots/UpdateSpot/UpdateSpot";
-import UserSpots from "./components/Spots/UserSpots/UserSpots";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,20 +25,18 @@ function App() {
         <Route exact path="/">
           <Spots />
         </Route>
-        <Route path='/spots/:spotId/edit'>
+        <Route exact path='/spots/:spotId/edit'>
             <UpdateSpot />
         </Route>
-        <Route path='/spots/:spotId'>
-          <SpotDetails />
-        </Route>
-        <Route exact path='/spotss/new'>
-          {/* remember to fix link to go to /spots/new */}
+        <Route exact path='/spots/new'>
             <CreateSpotForm />
         </Route>
-        <Route path='/users/:userId/spots'>
-            <UserSpots />
+        <Route exact path="/spots/current">
+          <ManageSpots />
         </Route>
-        
+        <Route exact path='/spots/:spotId'>
+          <SpotDetails />
+        </Route>    
       </Switch>}
     </>
   );

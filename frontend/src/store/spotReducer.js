@@ -72,11 +72,9 @@ export const loadAllSpotsUserThunk = () => async (dispatch) =>  {
 
     if (response.ok) {
         const spots = await response.json();
-
         dispatch(loadAllSpotsUser(spots));
         return spots;
     }
-    
 };
 
 export const loadSpotIdThunk = (spotId) => async (dispatch) => {
@@ -158,7 +156,7 @@ const spotReducer = (state = initialState, action) => {
         }
         case GET_ALL_SPOTS_USER: {
             const newState = {...state};
-            action.spots.Spots?.forEach(spot => newState[spot.id] = spot)
+            action.spots.Spots.forEach(spot => newState[spot.id] = spot)
             return newState
         }
         case GET_SPOT_ID: {

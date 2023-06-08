@@ -21,7 +21,7 @@ function Navigation({ isLoaded }){
       <div className="right-side-nav">
         <div>
           {/* remember to fix link to go to /spots/new */}
-          <Link to="/spotss/new"><button className="new-spot-button">Create a New Spot</button></Link>
+          <Link to="/spots/new"><button className="new-spot-button">Create a New Spot</button></Link>
         </div>
         <div>
           <ProfileButton user={sessionUser} />

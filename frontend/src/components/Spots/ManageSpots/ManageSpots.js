@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Redirect, useHistory, Link } from "react-router-dom";
+import { NavLink, Redirect, useHistory, Link, useParams } from "react-router-dom";
 import { loadAllSpotsUserThunk } from "../../../store/spotReducer";
 import CreateSpotForm from "../CreateSpotForm/CreateSpot";
+//import update(edit) also delete
 
 export default function ManageSpots() {
     const dispatch = useDispatch();
     const history = useHistory();
     const [isLoaded, setIsLoaded] = useState(false);
-    const userSpots = useSelector((state) => state.spot);
+    const userSpots = useSelector((state) => state.spot); 
     const userSpotsArr = Object.values(userSpots);
+    const correctUserArr = [];
+    
+    //need to make this value dynamic
+    for (let i = 0; i < userSpotsArr.length; i++) {
+      if (userSpotsArr[i]['ownerId'] === 1)  
+        correctUserArr.push(userSpotsArr[i])
+      }
+    
+    
     const star = String.fromCharCode(0x2605);
     useEffect(() => {
       dispatch(loadAllSpotsUserThunk()).then(() => setIsLoaded(true));
@@ -22,7 +32,7 @@ export default function ManageSpots() {
             <button>Create a new spot</button>
         </div>
         <div>
-        {userSpotsArr.map((spot) => {
+        {correctUserArr.map((spot) => {
           if (!spot || !spot.id || !spot.previewImage) {
             return null;
           }
@@ -47,7 +57,9 @@ export default function ManageSpots() {
         })}
         </div>
         <div>
-            <button>Update Spot</button>
+          {/* <Link to="/spots/new">
+            <button className="update-create-spot-button" >Update Spot</button>
+          </Link> */}
         </div>
       </div>
     );

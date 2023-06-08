@@ -35,7 +35,7 @@ export default function SpotCards() {
                     {star}<span className="star-rating">{spot.avgRating || "new"}</span>
                   </div>
                 </div> 
-                <div className="price-line"><span className="price-num">${spot.price.toFixed(2)}</span> night</div>
+                <div className="price-line"><span className="price-num">${spot.price}</span> night</div>
               </div>
             </div>
           );

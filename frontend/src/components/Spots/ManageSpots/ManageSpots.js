@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect, useHistory, Link, useParams } from "react-router-dom";
 import { loadAllSpotsUserThunk } from "../../../store/spotReducer";
 import CreateSpotForm from "../CreateSpotForm/CreateSpot";
+import UpdateSpot from "../UpdateSpot/UpdateSpot";
 //import update(edit) also delete
 
 export default function ManageSpots() {
+    const { spotId } = useParams();
+    console.log(spotId)
     const dispatch = useDispatch();
     const history = useHistory();
     const [isLoaded, setIsLoaded] = useState(false);

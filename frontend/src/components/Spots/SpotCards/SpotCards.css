@@ -1,33 +1,60 @@
+.card-image {
+    height: 300px;
+    width: 300px;
+    border: 1px solid gray;
+    border-radius: 15%;
+}
+
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    padding-left: 80px;
+    padding-top: 20px;
 }
 
 .under-image-top-line {
     display: flex;
+    align-items: center;
+}
+
+.spot-location,
+.price-line,
+.star-rating {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: black;
 }
 
 .spot-location {
-    padding-right: 100px;
+    font-weight: bold;
+}
+
+.price-num {
+    font-weight: bold;
+}
+
+.card-stars {
+    font-size: medium;
+    padding-left: 60px; 
+}
+
+.under-image {
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.star-rating {
+    padding-left: 5px;
 }
 
 .card {
     width: calc(33.33% - 20px);
     margin: 10px;
     
-}
-
-.cards {
-    /* border: 5px solid #000;
-    box-sizing: border-box; */
-    height: 200px;
-    width: 200px;
     
 }
 
-img {
-    height: 200px;
-    width: 200px;
-}
+
+
 

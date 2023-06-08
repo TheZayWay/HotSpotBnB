@@ -23,18 +23,19 @@ export default function SpotCards() {
           
           return (
             <div className="card" key={spot.id}>
-              <Link className="cards" to={`/spots/${spot.id}`}>
-                <img src={spot.previewImage} alt="Spot Preview" />
-                
+              <Link to={`/spots/${spot.id}`}>
+                <img src={spot.previewImage} alt="Spot Preview" className="card-image"/>
               </Link>
               <div className="under-image">
                 <div className="under-image-top-line">
                   <div className="spot-location">
                   {spot.city}, {spot.state} 
                   </div>
-                  {star}{spot.avgRating || "new"}
+                  <div className="card-stars">
+                    {star}<span className="star-rating">{spot.avgRating || "new"}</span>
+                  </div>
                 </div> 
-                <div className="price-line">${spot.price} night</div>
+                <div className="price-line">$<span className="price-num">{spot.price.toFixed(2)}</span> night</div>
               </div>
             </div>
           );

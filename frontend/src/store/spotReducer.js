@@ -91,66 +91,62 @@ export const loadSpotIdThunk = (spotId) => async (dispatch) => {
 };
 
 export const loadCreateSpotThunk = (spot) => async (dispatch) => {
-      const { address, city, state, country, name, description, price, url } = spot;
+      const { address, city, state, country, lat, lng, name, description, price, url } = spot;
   
       const response = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ address, city, state, country, name, description, price }),
+        body: JSON.stringify({ address, city, state, country, lat, lng, name, description, price }),
       });
   
-      if (!response.ok) {
-        throw new Error('Failed to create spot');
-      }
-  
-      const createdSpot = await response.json();
-      createdSpot.previewImage = url;
-  
-      dispatch(loadCreateSpot(createdSpot));
-  
-      const imageResponse = await csrfFetch(`/api/spots/${createdSpot.id}/images`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url }),
-      });
-  
-      if (!imageResponse.ok) {
-        throw new Error('Failed to upload image');
-      }
-      return createdSpot;
-
+    if (response.ok) {
+        const createdSpot = await response.json();
+        const imageResponse = await csrfFetch(`/api/spots/${createdSpot.id}/images`,{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                url,
+                preview: true
+            })
+        })
+        if (imageResponse.ok) {
+            createdSpot.previewImage = url;
+            dispatch(loadCreateSpot(createdSpot))
+            return createdSpot 
+        }     
+    }  
 };
 
-// // EDIT A SPOT --- /api/spots/:spotId
-// export const loadEditSpotThunk = (spot, id) => async (dispatch) => {
-//     const response = await csrfFetch(`/api/spots/${id}`, {
-//         method: 'PUT', 
-//         headers: {'Content-Type': 'application/json'},
-//         body: JSON.stringify(spot)
-//     });
+// EDIT A SPOT --- /api/spots/:spotId
+export const loadEditSpotThunk = (spot, id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spot.id}`, {
+        method: 'PUT', 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(spot)
+    });
 
-//     if (response.ok) {
-//         const updatedSpot = await response.json();
+    if (response.ok) {
+        const updatedSpot = await response.json();
+        const newlyUpdatedSpot = {...id, ...updatedSpot}
+        dispatch(loadEditSpot(newlyUpdatedSpot));
+        return newlyUpdatedSpot;
+    }
+};
 
-//         dispatch(loadEditSpot(updatedSpot));
-//         return updatedSpot;
-//     }
-// };
+// DELETE A SPOT --- /api/spots/:spotId
+export const loadDeleteSpotThunk = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    });
 
-// // DELETE A SPOT --- /api/spots/:spotId
-// export const loadDeleteSpotThunk = (spotId) => async (dispatch) => {
-//     const response = await csrfFetch(`/api/spots/${spotId}`, {
-//         method: 'DELETE'
-//     });
-
-//     if (response.ok) {
-//         dispatch(loadDeleteSpot(spotId));
-//     }
-// };
+    if (response.ok) {
+        dispatch(loadDeleteSpot(spotId));
+    }
+};
 
 const initialState = {};
 const spotReducer = (state = initialState, action) => {
@@ -158,31 +154,34 @@ const spotReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_ALL_SPOTS: {
             const newState = {...state};
-            action.spots.Spots.forEach(spot => {
-                newState[spot.id] = spot;
-            })
+            action.spots.Spots.forEach(spot => {newState[spot.id] = spot})
             return newState;
         }
-        // case GET_ALL_SPOTS_USER: {
-        //     const newState = {...state};
-        //     action.spots.Spots?.forEach(spot => newState[spot.id] = spot)
-        //     return newState
-        // }
+        case GET_ALL_SPOTS_USER: {
+            const newState = {...state};
+            action.spots.Spots?.forEach(spot => newState[spot.id] = spot)
+            return newState
+        }
         case GET_SPOT_ID: {
             const newState = {...state};
             newState[action.spot.id] = action.spot;
             return newState;
         }
-        // case CREATE_SPOT: {
-        //     const newState = {...state};
-        //     newState[action.spot.id] = action.spot;
-        //     return newState
-        // }
-        // case DELETE_SPOT: {
-        //     const newState = {...state};
-        //     delete newState[action.spotId];
-        //     return newState;
-        // }
+        case CREATE_SPOT: {
+            const newState = {...state};
+            newState[action.spot.id] = action.spot;
+            return newState;
+        }
+        case EDIT_SPOT: {
+            const newState = {...state}
+            newState[action.spot.id] = action.spot;
+            return newState;
+        }
+        case DELETE_SPOT: {
+            const newState = {...state};
+            delete newState[action.spotId];
+            return newState;
+        }
         default: {
             return state;
         }

@@ -150,7 +150,6 @@ export const loadDeleteSpotThunk = (spotId) => async (dispatch) => {
 
 const initialState = {};
 const spotReducer = (state = initialState, action) => {
-    console.log(action);
     switch(action.type) {
         case GET_ALL_SPOTS: {
             const newState = {...state};

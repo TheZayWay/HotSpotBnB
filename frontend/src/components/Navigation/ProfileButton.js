@@ -57,8 +57,8 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
-            <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/users/${user.id}/spots`}>My Spots</NavLink></li>
-            <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/users/${user.id}/trips`}>My Trips</NavLink></li>
+            <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/users/${user.id}/spots`}>Manage Spots</NavLink></li>
+            {/* <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/users/${user.id}/trips`}>My Trips</NavLink></li> */}
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

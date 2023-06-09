@@ -1,0 +1,82 @@
+.manage-spots-title {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.under-image-top-line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rating-line {
+    margin-right: 90px;
+    font-size: 18px;
+}
+
+.card-image {
+    height: 300px;
+    width: 320px;
+    border: 1px solid gray;
+    border-radius: 15%;
+}
+
+
+
+
+.update-create-spot-button {
+    background-color: #007bff;
+    color: whitesmoke;
+    border-radius: 10px;
+    border-color: whitesmoke;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    
+}
+
+.delete-create-spot-button {
+    background-color: #007bff;
+    color: whitesmoke;
+    border-radius: 10px;
+    border-color: whitesmoke;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-right: 75px;
+}
+
+.update-create-spot-button:hover {
+    color: black;
+    background-color: white;
+}
+
+.delete-create-spot-button:hover {
+    color: black;
+    background-color: white; 
+}
+
+.create-new-spot-btn {
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #007bff;
+    font-size: 20px;
+}
+
+.create-new-spot-btn:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.crud-buttons {
+    display: flex;
+    justify-content: space-between;
+}

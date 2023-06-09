@@ -58,10 +58,11 @@ function ProfileButton({ user }) {
             <li className="li-input">{user.username}</li>
             <li className="li-input">{user.firstName} {user.lastName}</li>
             <li className="li-input">{user.email}</li>
+            <hr></hr>
             <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/spots/current`}>Manage Spots</NavLink></li>
             {/* <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/users/${user.id}/trips`}>My Trips</NavLink></li> */}
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button onClick={logout} className="logout-button">Log Out</button>
             </li>
           </>
         ) : (

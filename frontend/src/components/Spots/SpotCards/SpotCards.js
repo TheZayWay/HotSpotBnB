@@ -32,7 +32,7 @@ export default function SpotCards() {
                   {spot.city}, {spot.state} 
                   </div>
                   <div className="card-stars">
-                    <span className="star-rating">{star} {spot.avgRating || "new"}</span>
+                    <span className="star-rating">{star} {spot.avgRating || "New"}</span>
                   </div>
                 </div> 
                 <div className="price-line"><span className="price-num">${spot.price}</span> night</div>

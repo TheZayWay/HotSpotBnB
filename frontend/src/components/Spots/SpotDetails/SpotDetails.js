@@ -13,9 +13,22 @@ export default function SpotDetails() {
     const image = spotData?.SpotImages?.[0]?.url;
     const user = spotData?.User;
     const star = String.fromCharCode(0x2605);
-    
+    let review = ""; 
+    // console.log("re", spotData.numReviews)
+    if (spotData.numReviews === 0) {
+      review = ""
+      spotData.numReviews = ""
+    }
+    if (spotData.numReviews === 1) {
+      review = "review"
+    }
+
+    if (spotData.numReviews > 1) {
+      review = "reviews"
+    }
+
     if (spotData?.avgStar === null) {
-      spotData.avgStar = "new"
+      spotData.avgStar = "New"
     } 
 
     useEffect(() => {
@@ -25,9 +38,6 @@ export default function SpotDetails() {
     if (spotId === spotData?.id) {
       return (
         <> 
-         {/* <div className="whole-container">
-          
-         </div>          */}
           <div className="spot-information-container">
             {spotData && (
               <>
@@ -46,8 +56,8 @@ export default function SpotDetails() {
             <p>{spotData.description}</p>
             <div className="reserve-container">
                <div className="reserve-top-line">
-                <div className="price">${spotData.price}night</div>
-                <div className="review-stuff">{star} {spotData.avgStar} {spotData.numReviews} reviews</div>
+                <div className="price">${spotData.price} <span className="night">night</span></div>
+                <div className="review-stuff">{star} {spotData.avgStar} {spotData.numReviews} {review} </div>
                </div> 
                <div className="reserve-bottom-line">
                 <button className="reserve-button" onClick={() => (alert("Feature coming soon..."))}>Reserve</button>
@@ -56,7 +66,7 @@ export default function SpotDetails() {
           </div>         
           <hr></hr>
           <p className="below-line">
-            {star} {spotData.avgStar} {spotData.numReviews}
+            {star} {spotData.avgStar} {spotData.numReviews} {review}
           </p>
           <div className="review-section">
             <div>FirstName</div>

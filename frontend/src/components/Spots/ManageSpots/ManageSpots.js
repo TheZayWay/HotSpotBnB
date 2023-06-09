@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect, useHistory, Link, useParams } from "react-router-dom";
 import { loadAllSpotsUserThunk } from "../../../store/spotReducer";
+import OpenModalButton from "../../OpenModalButton";
 import CreateSpotForm from "../CreateSpotForm/CreateSpot";
-import UpdateSpot from "../UpdateSpot/UpdateSpot";
-import ManageSpot from "./ManageSpot.css"
+import UpdateSpot from "../UpdateSpotForm/UpdateSpot";
+import DeleteSpot from "../DeleteSpot/DeleteSpot"
+import "./ManageSpot.css"
 //import update(edit) also delete
 
 export default function ManageSpots() {
@@ -17,12 +19,14 @@ export default function ManageSpots() {
     const userId = userState.session.user.id;
     const userSpotsArr = Object.values(userSpots);
     const correctUserArr = [];
-    
-    //need to make this value dynamic
+
+    //loop to get filtered spots
     for (let i = 0; i < userSpotsArr.length; i++) {
-      if (userSpotsArr[i]['ownerId'] === userId)  
+      if (userSpotsArr[i]['ownerId'] === userId) 
         correctUserArr.push(userSpotsArr[i])
       }
+   
+    
 
     const star = String.fromCharCode(0x2605);
     useEffect(() => {
@@ -60,10 +64,16 @@ export default function ManageSpots() {
                   ${spot.price} night
                 </div>
                 <div className="crud-buttons">
-                <Link to={`spot/${spotId}/edit`}>
-                  <button className="update-create-spot-button">Update Spot</button>
+                  {/* {console.log(spot.id)} */}
+                <Link to={`/spots/${spot.id}/edit`}>
+                <button className="update-create-spot-button">Update Spot</button>
                 </Link>
+                
                 <button className="delete-create-spot-button">Delete Spot</button>
+                <OpenModalButton
+                    buttonText="Delete"
+                    modalComponent={<DeleteSpot spotId={spot.id}/>}
+                />
                 </div>
               </div>
             </div>
@@ -75,3 +85,7 @@ export default function ManageSpots() {
       </div>    
     );
   }
+  
+  // // <button className="update-create-spot-button"
+  // spotid={<UpdateSpot spotById={spot.id} />}
+  // >Update Spot</button>

@@ -20,12 +20,20 @@ export default function SpotCards() {
           if (!spot || !spot.id || !spot.previewImage) {
             return null;
           }
+         
           
           return (
             <div className="card" key={spot.id}>
-              <Link to={`/spots/${spot.id}`}>
+              {/* <Link to={`/spots/${spot.id}`}>
                 <img src={spot.previewImage} alt="Spot Preview" className="card-image"/>
-              </Link>
+                <div className="tool-tip"><span className="tool-tip-text">{spot.name}</span></div>
+              </Link> */}
+              <Link to={`/spots/${spot.id}`}>
+        <div className="tooltip">
+          <img src={spot.previewImage} alt="Spot Preview" className="card-image" />
+          <span className="tooltip-text">{spot.name}</span>
+        </div>
+      </Link>
               <div className="under-image">
                 <div className="under-image-top-line">
                   <div className="spot-location">

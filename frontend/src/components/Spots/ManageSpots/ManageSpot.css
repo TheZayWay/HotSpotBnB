@@ -27,8 +27,6 @@
 }
 
 
-
-
 .update-create-spot-button {
     background-color: #007bff;
     color: whitesmoke;
@@ -80,3 +78,4 @@
     display: flex;
     justify-content: space-between;
 }
+

@@ -7,7 +7,7 @@ import CreateSpotForm from "../CreateSpotForm/CreateSpot";
 import UpdateSpot from "../UpdateSpotForm/UpdateSpot";
 import DeleteSpot from "../DeleteSpot/DeleteSpot"
 import "./ManageSpot.css"
-//import update(edit) also delete
+
 
 export default function ManageSpots() {
     const { spotId } = useParams();
@@ -26,8 +26,6 @@ export default function ManageSpots() {
         correctUserArr.push(userSpotsArr[i])
       }
    
-    
-
     const star = String.fromCharCode(0x2605);
     useEffect(() => {
       dispatch(loadAllSpotsUserThunk()).then(() => setIsLoaded(true));
@@ -37,7 +35,8 @@ export default function ManageSpots() {
       <div>
         <div>
           <h1 className="manage-spots-title">Your Spots</h1>
-          <button className="create-new-spot-btn">Create a new spot</button>
+          {/* <button className="create-new-spot-btn">Create a new spot</button> */}
+          {/* only want to show create a new spot if there are no spots */}
         </div>
         
         <div className="image-container">
@@ -68,9 +67,9 @@ export default function ManageSpots() {
                 <Link to={`/spots/${spot.id}/edit`}>
                 <button className="update-create-spot-button">Update Spot</button>
                 </Link>
-                
                 <button className="delete-create-spot-button">Delete Spot</button>
                 <OpenModalButton
+                    className="delete-btn"
                     buttonText="Delete"
                     modalComponent={<DeleteSpot spotId={spot.id}/>}
                 />

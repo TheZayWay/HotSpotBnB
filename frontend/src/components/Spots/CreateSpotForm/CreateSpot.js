@@ -61,7 +61,12 @@ export default function CreateSpotForm () {
        <div className="entire-create-spot-form">
         <form className="create-spot-form" onSubmit={handleSubmit}>
         <h2 className="create-spot-title">Create a Spot</h2>
-        Street Address  
+        <ul className='errors'>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <span className="form-input-headers">Street Address </span> 
         <label>
           <input
             type="text"
@@ -72,7 +77,7 @@ export default function CreateSpotForm () {
             placeholder="Street Address"
           />
         </label>
-        City
+        <span className="form-input-headers">City</span> 
         <label>
           <input
             type="text"
@@ -83,7 +88,7 @@ export default function CreateSpotForm () {
             placeholder="City"
           />
         </label>
-        State
+        <span className="form-input-headers">State</span> 
         <label>
           <input
             type="text"
@@ -94,7 +99,7 @@ export default function CreateSpotForm () {
             placeholder="State"
           />
         </label>
-        Country
+        <span className="form-input-headers">Country</span> 
         <label>
           <input
             type="text"
@@ -105,7 +110,7 @@ export default function CreateSpotForm () {
             placeholder="Country"
           />
         </label>
-        Name
+        <span className="form-input-headers">Name</span> 
         <label>
           <input
             type="text"
@@ -116,7 +121,7 @@ export default function CreateSpotForm () {
             placeholder="Name of your spot"
           />
         </label>
-        Description
+        <span className="form-input-headers">Description</span> 
         <label>
           <textarea
             type="textarea"
@@ -127,7 +132,7 @@ export default function CreateSpotForm () {
             placeholder="Please write a description here"
           />
         </label>
-        Price
+        <span className="form-input-headers">Price</span> 
         <label>
             <input 
               type="text"
@@ -138,7 +143,7 @@ export default function CreateSpotForm () {
               placeholder="Price in USD"
             />
         </label>
-        Image Url of Spot
+        <span className="form-input-headers">Image URL</span> 
         <label>
             <input 
                type='url'

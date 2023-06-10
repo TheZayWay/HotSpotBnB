@@ -55,10 +55,11 @@ function ProfileButton({ user }) {
         <div className="menu-user-items">
         {user ? (
           <>
-            <li className="li-input">{user.username}</li>
-            <li className="li-input">{user.firstName} {user.lastName}</li>
+            {/* <li className="li-input">{user.username}</li> */}
+            <li className="li-input">Hello {user.firstName}! </li>
+            {/* {user.lastName} */}
             <li className="li-input">{user.email}</li>
-            <hr></hr>
+            <hr className="divider"></hr>
             <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/spots/current`}>Manage Spots</NavLink></li>
             {/* <li><NavLink className="profile-button-nav" onClick={handleClick} to={`/users/${user.id}/trips`}>My Trips</NavLink></li> */}
             <li>

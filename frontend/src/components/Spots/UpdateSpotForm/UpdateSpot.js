@@ -9,9 +9,10 @@ export default function UpdateSpot () {
   let spotid;
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spot)
-  // console.log("spot", spot)
+  // console.log("spotid", spotId)
   const spotInfo = spot[spotId];
-  // console.log("spotIn", spotInfo)
+  console.log("spotIn", spotInfo)
+
   const history = useHistory();
   const [address, setAddress] = useState(spotInfo?.address);
   const [city, setCity] = useState(spotInfo?.city);
@@ -20,15 +21,16 @@ export default function UpdateSpot () {
   const [name, setName] = useState(spotInfo?.name);
   const [description, setDescription] = useState(spotInfo?.description);
   const [price, setPrice] = useState(spotInfo?.price);
-  const [url, setUrl] = useState(spotInfo?.url)
+  const [url, setUrl] = useState(spotInfo?.SpotImages?.[0]?.url)
   const [errors, setErrors] = useState([]);
   const [submitted, setSubmitted] = useState(false);
+  console.log("url", url)
   
   useEffect(() => {
-    // if (spotId) {
+    if (spotId) {
       dispatch(loadSpotIdThunk(spotId));
       setSubmitted(false);
-    // }
+    }
   }, [dispatch, spotId, submitted]);
 
   const handleSubmit = async (e) => {
@@ -50,17 +52,36 @@ export default function UpdateSpot () {
       url
     };
 
-    try {
-      const spot = await dispatch(loadEditSpotThunk(spotDetails));
-      spotId = spot.id;
-      history.push(`/spots/${spot.id}`);
-      setSubmitted(true);
-    } catch (error) {
-      console.error(error);
-      // Handle error state or display error message to the user
-    }
-  };
+    return await dispatch(loadEditSpotThunk(spotDetails, spotId))
+            .then(() => history.push(`/spots/${spotId}`))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) {
+                    const errorMessages = Object.values(data.errors);
+                    const formattedErrorMessages = errorMessages.map(error => error.split(": ")[1]);
+                    setErrors(formattedErrorMessages);
+                }
+            });
 
+  //   try {
+  //     const spot = 
+  //     // spotid = spot.id;  
+  //     setSubmitted(true);
+  //     history.push(`/spots/${spotId}`);
+  //   } catch (error) {
+  //     console.error(error);
+  //     // Handle error state or display error message to the user
+  //   }
+  // };
+  // return await dispatch(loadEditSpotThunk(spotDetails, spotId))
+  // .then(() => history.push(`/spots/${spot.id}`))
+  //       .catch(
+  //         async (res) => {
+  //           const data = await res.json();
+  //           if(data && data.errors) setErrors(data.errors)
+  //         }
+  //       )
+    }
   
   
     return (

@@ -121,7 +121,7 @@ export const loadCreateSpotThunk = (spot) => async (dispatch) => {
 
 // EDIT A SPOT --- /api/spots/:spotId
 export const loadEditSpotThunk = (spot, id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spot.id}`, {
+    const response = await csrfFetch(`/api/spots/${id}`, {
         method: 'PUT', 
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(spot)
@@ -129,7 +129,9 @@ export const loadEditSpotThunk = (spot, id) => async (dispatch) => {
 
     if (response.ok) {
         const updatedSpot = await response.json();
+        console.log("upspot:", updatedSpot)
         const newlyUpdatedSpot = {...id, ...updatedSpot}
+        console.log("new:", newlyUpdatedSpot)
         dispatch(loadEditSpot(newlyUpdatedSpot));
         return newlyUpdatedSpot;
     }

@@ -68,13 +68,10 @@ export default function SpotDetails() {
             </div>
           </div>         
           <hr></hr>
-          <p className="below-line">
+          {/* <p className="below-line">
             {star} {spotData?.avgStar} {spotData?.numReviews} {review}
-          </p>
+          </p> */}
           <div className="review-section">
-            <div>FirstName</div>
-            <div>Date of Review</div>
-            <div>Comment Text</div>
             <div className="review-bookings-div">
                 <div className="left-side-review-bookings">
                     <ReviewsForSpot spotData={spotData}/>

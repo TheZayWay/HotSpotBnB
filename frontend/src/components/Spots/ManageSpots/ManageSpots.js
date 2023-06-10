@@ -67,7 +67,6 @@ export default function ManageSpots() {
                 <Link to={`/spots/${spot.id}/edit`}>
                 <button className="update-create-spot-button">Update Spot</button>
                 </Link>
-                <button className="delete-create-spot-button">Delete Spot</button>
                 <OpenModalButton
                     className="delete-btn"
                     buttonText="Delete"

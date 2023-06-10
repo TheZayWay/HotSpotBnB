@@ -10,7 +10,8 @@
 .menu-button {
     border-radius: 30px;
     display: flex;
-    align-items: center;
+    align-items: center; 
+    
 }
 
 ul {
@@ -55,12 +56,11 @@ ul {
 
   }
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-  }
+    /* .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    } */
 
   .li-input {
     padding: 1px;

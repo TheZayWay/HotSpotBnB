@@ -7,6 +7,7 @@ import './Navigation.css';
 import hotSpot from './Images/hot-spot-pic.jpeg'
 
 function Navigation({ isLoaded }){
+  
   const sessionUser = useSelector(state => state.session.user);
   let session;
 
@@ -18,7 +19,7 @@ function Navigation({ isLoaded }){
     )
   } else {
     session = (
-      <div className="right-side-nav">
+        <div className="right-side-nav">
         <div>
           {/* remember to fix link to go to /spots/new */}
           <Link to="/spots/new"><button className="new-spot-button">Create a New Spot</button></Link>

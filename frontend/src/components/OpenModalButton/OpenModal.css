@@ -1,0 +1,13 @@
+.modal-button {
+    background-color: #007bff;
+    color: whitesmoke;
+    border-radius: 10px;
+    border-color: whitesmoke;
+    height: 30px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-weight: bold;
+}
+
+.modal-button:hover {
+    background-color: gray;
+}

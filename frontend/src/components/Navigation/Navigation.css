@@ -2,6 +2,12 @@
     display: none
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .site-title {
     color: #007bff;
     font-weight: bold;
@@ -9,14 +15,13 @@
     font-stretch: expanded;
 }
 
+
 .home {
     display: flex;
     align-items: center;
     padding-left: 50px;
     font-size: 30px;
     height: 60px;
-    
-
 }
 
 .new-spot-button {
@@ -26,7 +31,7 @@
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
     font-weight: bold;
     color: #007bff;
-    
+
 }
 
 .new-spot-button:hover {
@@ -39,9 +44,14 @@
     border: none;
 }
 
+
+
 .right-side-nav {
     display: flex;
     justify-content: end;
+      
+    
+
 } 
 
 .li-modals {
@@ -54,6 +64,7 @@
 
 .profile-button-nav {
     color: #007bff;
+    
 }
 
 .profile-button-nav:hover {

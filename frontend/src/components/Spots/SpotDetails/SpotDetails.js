@@ -32,7 +32,12 @@ export default function SpotDetails() {
 
     if (spotData?.avgStar === null) {
       spotData.avgStar = "New"
-    } 
+    }
+    
+    // if (spotData?.avgStar !== null) {
+      
+    // }
+  
 
     useEffect(() => {
       dispatch(loadSpotIdThunk(spotId));
@@ -59,8 +64,9 @@ export default function SpotDetails() {
             <p className="spot-description">{spotData?.description}</p>
             <div className="reserve-container">
                <div className="reserve-top-line">
-                  {console.log("rating", spotData.avgStar.toFixed(2))}
+                  
                   <div className="price">${spotData?.price} <span className="night">night</span></div>
+                
                   <div className="review-stuff">{star} {spotData.avgStar || "New"}<div className="period">&#x2022;</div>{spotData?.numReviews} {review} </div>                  
                </div> 
                <div className="reserve-bottom-line">

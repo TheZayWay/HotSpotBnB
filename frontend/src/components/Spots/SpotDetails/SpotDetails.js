@@ -17,10 +17,11 @@ export default function SpotDetails() {
     const user = spotData?.User; //user who made the listing
     const star = String.fromCharCode(0x2605);
     let review = "";
-    // console.log("re", spotData.numReviews)
+   
     if (spotData?.numReviews === 0) {
       review = ""
       spotData.numReviews = ""
+     
     }
     if (spotData?.numReviews === 1) {
       review = "review"
@@ -32,8 +33,13 @@ export default function SpotDetails() {
 
     if (spotData?.avgStar === null) {
       spotData.avgStar = "New"
+      
     }
     
+    
+
+    console.log("spotData", spotData)
+ 
     // if (spotData?.avgStar !== null) {
       
     // }
@@ -65,7 +71,8 @@ export default function SpotDetails() {
             <div className="reserve-container">
                <div className="reserve-top-line">
                   <div className="price">${spotData?.price} <span className="night">night</span></div>
-                  <div className="review-stuff">{star} {!isNaN(spotData.avgStar) ? spotData.avgStar.toFixed(2) : "New"}<div className="period">&#x2022;</div>{spotData?.numReviews} {review} </div>                  
+                  {console.log("spotData.numrev", spotData.numReviews)}
+                  <div className="review-stuff">{star} {!isNaN(spotData.avgStar) ? spotData.avgStar.toFixed(2) : "New"}<div className="period">{spotData.numReviews > 0 ? <div>&#x2022;</div> : ""}</div>{spotData?.numReviews} {review} </div>                  
                </div> 
                <div className="reserve-bottom-line">
                 <button className="reserve-button" onClick={() => (alert("Feature coming soon..."))}>Reserve</button>

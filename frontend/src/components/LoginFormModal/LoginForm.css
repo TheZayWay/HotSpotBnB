@@ -1,26 +1,25 @@
 .login-title {
-    /* padding-bottom: 10px;
     display: flex;
-    justify-content: center; */
+    justify-content: center;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-weight: normal;
 }
 
-.login-button {
-    /* background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer; */
-
-}
-
-.login-form {
-    /* width: 100% */
-}
 
 .credential-input,
 .password-input {
-    width: 100%
+    width: 250px;
+    border: 2px solid black; 
+}
+
+.credential-input {
+    margin-bottom: 5px;
+}
+
+.password-input {
+    margin-bottom: 20px;
 }
 
 .entire-login-modal {
@@ -28,14 +27,50 @@
     flex-direction: column;
     border: 2px solid #000000;
     padding: 30px;
-    height: 300px;
-    width: 200px;
+    height: 180px;
+    width: 250px;
 }
 
-/* .login-button {
-    width: 80%
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.form {
-    border: none
-} */
+.login-button {
+    color: whitesmoke;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border: 2px solid black;
+    box-shadow: 2px 2px black;
+    cursor: pointer;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    width: 255px; 
+}
+
+/* when log in button is disable use this css */
+.login-button:hover {
+    background-color: whitesmoke;
+    color: gray;
+    padding: 10px 20px;
+    border: 2px solid gray;
+    box-shadow: 2px 2px gray;
+    cursor: pointer;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    width: 255px;   
+}
+
+.demo-user-button {
+    margin-top: 10px;
+    border: none;
+    background-color: transparent;
+    color: darkcyan;
+    text-decoration: underline;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+.demo-user-button:hover {
+    color: black;
+    cursor: pointer;
+}

@@ -44,7 +44,7 @@ function SignupFormModal() {
   return (
     <>
     <div className="entire-signup-modal">
-    <h1>Sign Up</h1>
+    <h1 className="signup-title">Sign Up</h1>
       <form className="signup-form" onSubmit={handleSubmit}>
         <label> 
           <input

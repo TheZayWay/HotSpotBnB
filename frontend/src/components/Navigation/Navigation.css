@@ -60,6 +60,7 @@
 
 .li-modals {
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .li-modals:hover {

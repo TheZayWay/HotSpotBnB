@@ -1,6 +1,16 @@
 .entire-signup-modal {
     height: 300px;
-    width: 300px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-title {
+    font-size: 20px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-weight: normal;
 }
 
 .signup-form {
@@ -10,9 +20,32 @@
 }
 
 .signup-input-field {
-    width: 95%
+    width: 310px;
+    border: 2px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 .signup-button {
-    width: 98%
+    width: 318px;
+    color: whitesmoke;
+    background-color: #007bff;
+    padding: 10px 20px;
+    margin-top: 5px;
+    border: 2px solid black;
+    box-shadow: 2px 2px black;
+    cursor: pointer;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+.signup-button:hover {
+    width: 318px;
+    background-color: whitesmoke;
+    color: gray;
+    padding: 10px 20px;
+    border: 2px solid gray;
+    box-shadow: 2px 2px gray;
+    margin-top: 5px;
+    cursor: pointer;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
 }

@@ -68,6 +68,7 @@ export default function ManageSpots() {
                 <div className="price-line">
                   <span className="manage-price">${spot.price}</span> night
                 </div>
+                <div className="crud-button-container">
                 <div className="crud-buttons">
                   {/* {console.log(spot.id)} */}
                 <Link to={`/spots/${spot.id}/edit`}>
@@ -78,6 +79,7 @@ export default function ManageSpots() {
                     buttonText="Delete"
                     modalComponent={<DeleteSpot spotId={spot.id}/>}
                 />
+                </div>
                 </div>
               </div>
             </div>

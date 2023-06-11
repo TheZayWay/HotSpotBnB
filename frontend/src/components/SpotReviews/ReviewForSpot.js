@@ -90,7 +90,7 @@ const ReviewsForSpot = ({ spotData }) => {
                       <div className="edit-review-div-container">
                         {sessionUserId && sessionUserId === review.userId ? (
                           <OpenModalButton
-                            className="delete-review"
+                            className="delete-review-button"
                             buttonText="Delete"
                             modalComponent={<DeleteReview review={review} sessionUser={user} />}
                           />

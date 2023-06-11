@@ -110,15 +110,10 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    /* padding-left: 50px; */
-    margin-left: auto;
-    
+    padding-left: 50px; 
+    margin-left: auto; 
 }
 
-.delete-review {
-    margin-bottom: 5px;
-
-}
 
 .number-review-header {
     margin-right: 16vw;

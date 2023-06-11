@@ -47,11 +47,15 @@
 
 
 .right-side-nav {
+    /* display: flex;
+    justify-content: end; */
     display: flex;
-    justify-content: end;
-      
+    justify-content: flex-end;
+    margin-top: 20px;
+    height: 50px; /* Adjust the height to your desired value */
+    overflow-y: scroll;
+    z-index: 1;
     
-
 } 
 
 .li-modals {
@@ -64,7 +68,6 @@
 
 .profile-button-nav {
     color: #007bff;
-    
 }
 
 .profile-button-nav:hover {

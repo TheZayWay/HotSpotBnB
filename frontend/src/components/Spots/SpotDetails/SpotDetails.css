@@ -68,6 +68,7 @@
 .reserve-top-line {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     align-items: center;
     padding-right: 10px;
     padding-bottom: 20px;
@@ -78,10 +79,20 @@
     padding-left: 5px;
 }
 
+.review-stuff {
+    display: flex;
+    font-weight: bold;
+}
+
 .night {
     font-weight: lighter;
 }
 
+.period {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: lighter;
+}
 
 .reserve-bottom-line {
     display: flex;

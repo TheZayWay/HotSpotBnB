@@ -16,3 +16,74 @@
     background-color: rgb(240, 240, 240);
     color: black;
 }
+
+.delete-review-modal-container {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.close-edit-button {
+    margin-left: 60px;
+}
+
+.review-delete-header {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    padding-left: 540px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.delete-text-p-tag {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -30px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+.delete-form-container {
+    display: flex;
+    flex-direction: column;
+    padding-right: 440px;
+}
+
+.review-cancel-button {
+    /* background-color: grey;
+    color: whitesmoke;
+    
+    height: 50px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-weight: bold; */ 
+    width: 320px;
+    height: 50px; 
+    margin-bottom: 10px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important; 
+    color: whitesmoke;
+    background-color: gray;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    
+}
+
+
+.review-delete-button {
+    /* 
+    border-color: whitesmoke;
+    height: 30px;
+    
+    font-weight: bold; */
+    height: 50px; 
+    margin-bottom: -55px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    background-color: #007bff;
+    color: whitesmoke;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    
+}
+
+.review-delete-button:hover {
+    background-color: grey;
+}
+

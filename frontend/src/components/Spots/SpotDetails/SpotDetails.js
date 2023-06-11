@@ -59,8 +59,10 @@ export default function SpotDetails() {
             <p className="spot-description">{spotData?.description}</p>
             <div className="reserve-container">
                <div className="reserve-top-line">
-                <div className="price">${spotData?.price} <span className="night">night</span></div>
-                <div className="review-stuff">{star} {spotData?.avgStar} {spotData?.numReviews} {review} </div>
+                
+                  <div className="price">${spotData?.price} <span className="night">night</span></div>
+                  <div className="review-stuff">{star} {spotData?.avgStar}<div className="period">&#x2022;</div>{spotData?.numReviews} {review} </div>
+              
                </div> 
                <div className="reserve-bottom-line">
                 <button className="reserve-button" onClick={() => (alert("Feature coming soon..."))}>Reserve</button>

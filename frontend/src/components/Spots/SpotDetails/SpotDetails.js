@@ -66,8 +66,8 @@ export default function SpotDetails() {
                <div className="reserve-top-line">
                   
                   <div className="price">${spotData?.price} <span className="night">night</span></div>
-                
-                  <div className="review-stuff">{star} {spotData.avgStar || "New"}<div className="period">&#x2022;</div>{spotData?.numReviews} {review} </div>                  
+                  {/* {spotData.avgStar || "New"} */}
+                  <div className="review-stuff">{star} {!isNaN(spotData.avgStar) ? spotData.avgStar.toFixed(2) : "New"}<div className="period">&#x2022;</div>{spotData?.numReviews} {review} </div>                  
                </div> 
                <div className="reserve-bottom-line">
                 <button className="reserve-button" onClick={() => (alert("Feature coming soon..."))}>Reserve</button>

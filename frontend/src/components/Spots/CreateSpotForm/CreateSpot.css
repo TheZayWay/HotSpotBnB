@@ -18,6 +18,7 @@
     padding: 10px;
 }
 
+
 .create-spot-title {
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
     font-weight: bold;
@@ -38,7 +39,7 @@
     margin-bottom: 5px;
     
   }
-
+  
 
 
 .create-submit-button {
@@ -64,21 +65,22 @@
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important; 
 }
 
-.errors {
+.error-container {
+  display: flex;
+  flex-direction: column;
+  width: 20px;
+  }
+  
+  .validation-error {
     color: darkred;
     display: flex;
-    flex-direction: column;
-    padding-right: 20px;
-    padding-bottom: -30px;
-}
+    flex-wrap: wrap;
+    width: 300px;
+  }
 
-.error {
-    
-}
-
-.validation-error {
-    display: hidden;
-}
+  .errors {
+    height: 30px;
+  }
 
 
 .create-spot-p-tag {

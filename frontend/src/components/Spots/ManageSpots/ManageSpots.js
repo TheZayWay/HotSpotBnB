@@ -37,7 +37,13 @@ export default function ManageSpots() {
           <h1 className="manage-spots-title">Your Spots</h1>
           {/* <button className="create-new-spot-btn">Create a new spot</button> */}
           {/* only want to show create a new spot if there are no spots */}
-        </div>
+        {/* </div> */}
+        {correctUserArr.length === 0 ? (
+          <Link to="/spots/new" className="create-new-spot-link">
+            Create a new spot
+          </Link>
+        ) : null}
+      </div>
         
         <div className="image-container">
           {correctUserArr.map((spot) => {

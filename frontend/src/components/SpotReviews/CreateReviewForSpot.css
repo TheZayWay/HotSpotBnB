@@ -1,4 +1,4 @@
-.create-review-container {
+/* .create-review-container {
     padding: 0em 1em 0em;
     height: 24em;
     width: auto;
@@ -61,7 +61,7 @@
     background-color: rgb(252, 89, 119);
 }
 
-input:disabled, button:disabled
+  input:disabled, button:disabled
 {
     color:rgb(172, 172, 172);
     text-decoration:underline;
@@ -81,4 +81,86 @@ input:disabled, button:disabled
     flex-wrap: wrap;
     list-style: none;
     margin-bottom: 0;
+} */
+
+/* .leave-review-title {
+  margin-left: 90px;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+} */
+
+.textarea-title {
+  margin-left: 60px;
+  margin-bottom: 40px;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
 }
+
+.review-text-area {
+  margin-left: 40px;
+  margin-top: -20px;
+  margin-bottom: 15px;
+  padding: 20px;
+  border: 2px solid black;
+}
+
+
+.review-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .rating-stars {
+    font-size: 24px;
+    padding-left: 60px;
+  }
+  
+  .star {
+    display: inline-block;
+    cursor: pointer;
+    transition: color 0.3s;
+    margin-left: 2px;
+    margin-bottom: 10px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+  }
+  
+  .filled {
+    color: #007bff;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+  }
+
+
+  .create-review-container {
+    width: 300px; /* Adjust the width as per your needs */
+    height: 250px; /* Adjust the height as per your needs */
+    /* Other styles for the modal container */
+  }
+
+  .create-review-submit-btn {
+    width: 250px;
+    height: 35px;
+    margin-left: 23px;
+    color: whitesmoke;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border: 2px solid black;
+    box-shadow: 2px 2px black;
+    cursor: pointer;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+  }
+
+  .create-review-submit-btn:hover {
+    background-color: whitesmoke;
+    color: gray;
+    padding: 10px 20px;
+    border: 2px solid gray;
+    box-shadow: 2px 2px gray;
+    cursor: pointer;
+  }
+
+  .stars-word {
+    margin-left: 10px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: 16px;
+  }
+
+  

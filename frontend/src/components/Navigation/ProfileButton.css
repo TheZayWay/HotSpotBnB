@@ -10,7 +10,9 @@
 .menu-button {
     border-radius: 30px;
     display: flex;
-    align-items: center; 
+    align-items: center;
+    margin-left: 20px; 
+    margin-right: 10px;
     
 }
 

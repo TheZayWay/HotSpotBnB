@@ -19,16 +19,16 @@ export default function DeleteSpot ({spotId}) {
     }
 
     return (
-        <div className="delete-modal-container">
+        <div className="delete-spot-modal-container">
         <div className="delete-pop-up">
             <div className="delete-header-close-button">
-                <span className="close-edit-button" onClick={() => closeModal()}><i className="fas fa-times"></i></span>
-                <div className="delete-header">Delete Spot</div>
+                {/* <span className="close-edit-button" onClick={() => closeModal()}><i className="fas fa-times"></i></span> */}
+                <div className="delete-spot-header">Delete Spot</div>
             </div>
-            <p className="delete-text-p-tag">Are you sure you want to delete <span className="spot-info-name">{spotInfo?.name}</span>?</p>
+            <p className="delete-spot-text-p-tag">Are you sure you want to remove this spot?</p>
             <form className="delete-form-container" onSubmit={handleClick}>
-                <button className="cancel-button" onClick={() => closeModal()}>Cancel</button>
-                <button className="delete-button" type="submit">Delete</button>
+            <button className="spot-delete-button" type="submit">Delete</button>
+                <button className="spot-cancel-button" onClick={() => closeModal()}>Cancel</button>
             </form>
         </div>
     </div>

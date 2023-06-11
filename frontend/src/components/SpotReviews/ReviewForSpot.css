@@ -25,6 +25,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
     gap: 10px;
+    overflow: auto;
 }
 
 @media (max-width: 1250px) {
@@ -32,6 +33,13 @@
         display: flex;
         flex-direction: column;
     }
+}
+
+.stars-user-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
 }
 
 .review-and-pic {

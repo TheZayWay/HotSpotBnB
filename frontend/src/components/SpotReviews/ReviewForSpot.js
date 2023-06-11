@@ -44,13 +44,13 @@ const ReviewsForSpot = ({ spotData }) => {
   if (spotData.avgStar === null) {
     spotData.avgStar = "New";
   }
-
+ 
   return (
     <>
       <div className="whole-reviews-container">
         <div className="description-for-reviews">
           <i className="fa fa-star fa-s"></i>
-          <h3 className="avg-star-rating">{spotData?.avgStar}</h3>
+          <h3 className="avg-star-rating">{!isNaN(spotData.avgStar) ? spotData.avgStar.toFixed(2) : "New"}</h3>
           <div>&#x2022;</div>
           <h3 className="number-review-header">{`${spotData?.numReviews} ${
             spotData?.numReviews > 1 ? "reviews" : "review"
@@ -90,7 +90,11 @@ const ReviewsForSpot = ({ spotData }) => {
               </div>
             ))
           ) : (
-            <div>No reviews available</div> // Conditional rendering when no reviews are available
+            <div className="no-reviews">
+            {userLoggedIn
+              ? "Be the first to post a review!"
+              : "No reviews available"}
+          </div>
           )}
         </div>
       </div>

@@ -64,9 +64,7 @@ export default function SpotDetails() {
             <p className="spot-description">{spotData?.description}</p>
             <div className="reserve-container">
                <div className="reserve-top-line">
-                  
                   <div className="price">${spotData?.price} <span className="night">night</span></div>
-                  {/* {spotData.avgStar || "New"} */}
                   <div className="review-stuff">{star} {!isNaN(spotData.avgStar) ? spotData.avgStar.toFixed(2) : "New"}<div className="period">&#x2022;</div>{spotData?.numReviews} {review} </div>                  
                </div> 
                <div className="reserve-bottom-line">

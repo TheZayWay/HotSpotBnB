@@ -56,11 +56,11 @@ export default function ManageSpots() {
                   {spot.city}, {spot.state} 
                   </div>
                   <div className="rating-line">
-                    {star} {spot.avgRating || "new"}
+                    {star} {!isNaN(spot.avgRating) && spot.avgRating !== 0.00 ? spot.avgRating.toFixed(2) : "New"}
                   </div>
                 </div> 
                 <div className="price-line">
-                  ${spot.price} night
+                  <span className="manage-price">${spot.price}</span> night
                 </div>
                 <div className="crud-buttons">
                   {/* {console.log(spot.id)} */}
@@ -68,7 +68,7 @@ export default function ManageSpots() {
                 <button className="update-create-spot-button">Update Spot</button>
                 </Link>
                 <OpenModalButton
-                    className="delete-btn"
+                    className="manage-delete-btn"
                     buttonText="Delete"
                     modalComponent={<DeleteSpot spotId={spot.id}/>}
                 />

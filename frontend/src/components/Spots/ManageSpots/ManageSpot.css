@@ -12,11 +12,22 @@
 .under-image-top-line {
     display: flex;
     justify-content: space-between;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
 }
 
 .rating-line {
     margin-right: 90px;
     font-size: 18px;
+    
+}
+
+.price-line {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    
+}
+
+.manage-price {
+    font-weight: bold;
 }
 
 .card-image {
@@ -48,6 +59,8 @@
     font-weight: bold;
     margin-right: 75px;
 }
+
+
 
 .update-create-spot-button:hover {
     color: black;

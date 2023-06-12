@@ -13,9 +13,12 @@ function Navigation({ isLoaded }){
 
   if (!sessionUser) {
     session = (
-      <div>
-        <ProfileButton user={sessionUser} />
+      <div className="right-side-nav">
+         <div>
+          <ProfileButton user={sessionUser} />
+        </div>
       </div>
+     
     )
   } else {
     session = (

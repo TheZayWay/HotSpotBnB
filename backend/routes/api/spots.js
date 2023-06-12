@@ -347,10 +347,11 @@ const validateQuery = [
             description: description,
             price: price
           })
-          res.json(spot)
+          await spot.save()
+          return res.json(spot)
         }
         else {
-          res.status(403).json({message: "Spot must belong to current user."})
+          return res.status(403).json({message: "Spot must belong to current user."})
         }
         
       }

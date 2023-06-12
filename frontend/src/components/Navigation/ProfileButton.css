@@ -34,7 +34,7 @@ ul {
     border-radius: 5px;
     list-style: none;
     position: absolute;
-    right: 130px;
+    right: 50px;
     top: 50px;
     padding-left: 10px;
     padding-bottom: 10px;
@@ -42,7 +42,6 @@ ul {
     padding-top: 10px;
     background-color: white;
     overflow: hidden;
-    position: fixed;
   }
 
   li {

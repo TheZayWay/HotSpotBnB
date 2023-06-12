@@ -38,7 +38,7 @@ export default function SpotDetails() {
     }
   
     useEffect(() => {
-      dispatch(loadSpotIdThunk(spotId));
+      dispatch(loadSpotIdThunk(spotId, spotData));
     }, [dispatch, spotId]);
   
     if (spotId === spotData?.id) {

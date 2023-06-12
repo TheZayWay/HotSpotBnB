@@ -77,14 +77,18 @@ export const loadAllSpotsUserThunk = () => async (dispatch) =>  {
     }
 };
 
-export const loadSpotIdThunk = (spotId) => async (dispatch) => {
+export const loadSpotIdThunk = (spotId, spotData) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`);
-    
-    if (response.ok) {
-        const spot = await response.json();
 
-        dispatch(loadSpotId(spot));
-        return spot;
+    if (response.ok) {
+
+        const spot = await response.json();
+        const singleSpot = {...spot, ...spotData}
+
+        console.log("SPOT ID THUNKER  ================>", singleSpot)
+
+        dispatch(loadSpotId(singleSpot));
+        return singleSpot;
     }
 };
 

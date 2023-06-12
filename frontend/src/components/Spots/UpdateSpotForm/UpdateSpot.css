@@ -20,7 +20,7 @@
   }
   
   .has-errors .update-spot-form {
-    min-height: 1100px; /* Increase the height when errors are present */
+    min-height: 900px; /* Increase the height when errors are present */
   }
 
 

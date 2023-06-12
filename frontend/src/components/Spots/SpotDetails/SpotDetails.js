@@ -3,16 +3,18 @@ import { useEffect } from 'react';
 import { loadSpotIdThunk } from '../../../store/spotReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import ReviewsForSpot from '../../SpotReviews/ReviewForSpot';
+import UpdateSpotForm from '../UpdateSpotForm/UpdateSpot';
 import './SpotDetails.css';
 
 export default function SpotDetails() {
     const dispatch = useDispatch();
     const params = useParams();
     const spotId = Number(params.spotId);
-    // console.log("spotId", spotId)
+ 
     const spot = useSelector((state) => state.spot);
+    
     const spotData = spot[spotId];
-    // console.log("spotData:", spotData)
+ 
     const image = spotData?.SpotImages?.[0]?.url;
     const user = spotData?.User; //user who made the listing
     const star = String.fromCharCode(0x2605);
@@ -21,7 +23,6 @@ export default function SpotDetails() {
     if (spotData?.numReviews === 0) {
       review = ""
       spotData.numReviews = ""
-     
     }
     if (spotData?.numReviews === 1) {
       review = "review"
@@ -35,16 +36,7 @@ export default function SpotDetails() {
       spotData.avgStar = "New"
       
     }
-    
-    
-
-    console.log("spotData", spotData)
- 
-    // if (spotData?.avgStar !== null) {
-      
-    // }
   
-
     useEffect(() => {
       dispatch(loadSpotIdThunk(spotId));
     }, [dispatch, spotId]);
@@ -67,11 +59,11 @@ export default function SpotDetails() {
             Hosted by {user?.firstName} {user?.lastName}
           </div>
           <div className="bottom-row">
-            <p className="spot-description">{spotData?.description}</p>
+            <div className="spot-desc-container"><p className="spot-description">{spotData?.description}</p></div>
+            
             <div className="reserve-container">
                <div className="reserve-top-line">
                   <div className="price">${spotData?.price} <span className="night">night</span></div>
-                  {console.log("spotData.numrev", spotData.numReviews)}
                   <div className="review-stuff">{star} {!isNaN(spotData.avgStar) ? spotData.avgStar.toFixed(2) : "New"}<div className="period">{spotData.numReviews > 0 ? <div>&#x2022;</div> : ""}</div>{spotData?.numReviews} {review} </div>                  
                </div> 
                <div className="reserve-bottom-line">

@@ -3,6 +3,8 @@
     justify-content: center;
     flex-direction: column;
     padding-right: 50px;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 
 .spot-name,
@@ -49,9 +51,17 @@
     font-size: 20px;
 }
 
-.spot-description {
+.spot-desc-container {
     margin-left: 240px;
+    overflow: auto;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    
 }
+/* 
+.spot-description {
+    
+} */
 
 .reserve-container {
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
@@ -63,6 +73,8 @@
     margin-top: -50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 
 .reserve-top-line {

@@ -12,7 +12,6 @@ const ReviewsForSpot = ({ spotData }) => {
   const dispatch = useDispatch();
   const { spotId } = useParams();
   const spotDataId = spotData.id;
-  console.log("spotData", spotData);
 
   useEffect(() => {
     dispatch(thunkLoadReviewsForSpot(spotId));
@@ -25,9 +24,24 @@ const ReviewsForSpot = ({ spotData }) => {
   const user = revObj.session.user;
   const ownerId = revObj.spot[spotDataId].ownerId;
   let userLoggedIn = null;
-
+  
   // Check if the user is logged in and not the owner of the spot
-  if (sessionUserId && sessionUserId !== ownerId && Object.keys(reviews).length === 0) {
+  // && Object.keys(reviews).length === 0
+  // if (sessionUserId && sessionUserId !== ownerId ) {
+  //   userLoggedIn = (
+  //     <div className="review-modal-button">
+  //       <OpenModalButton
+  //         className="review-button"
+  //         buttonText="Post a review"
+  //         modalComponent={
+  //           <CreateReviewForSpots spotId={spotDataId} sessionUser={user} />
+  //         }
+  //       />
+  //     </div>
+  //   );
+  // }
+
+  if (sessionUserId && sessionUserId !== ownerId && !reviewsArr.some(review => review.userId === sessionUserId)) {
     userLoggedIn = (
       <div className="review-modal-button">
         <OpenModalButton
@@ -44,10 +58,6 @@ const ReviewsForSpot = ({ spotData }) => {
   if (spotData.avgStar === null) {
     spotData.avgStar = "New";
   }
-
-  if (Object.values(reviews).length === 0) {
-
-  } 
   
  
   return (

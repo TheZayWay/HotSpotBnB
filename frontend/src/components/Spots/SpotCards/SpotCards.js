@@ -41,9 +41,12 @@ export default function SpotCards() {
                   <div className="spot-location">
                   {spot.city}, {spot.state} 
                   </div>
-                  <div className="card-stars">
-                    <span className="star-rating">{star} {spot.avgRating.toFixed(2) !== "0.00" ? spot.avgRating.toFixed(2) : "New"}</span>
-                  </div>
+                  
+                    <div className="card-stars">
+                      <span className="star-rating">{star} {spot.avgRating.toFixed(2) !== "0.00" ? spot.avgRating.toFixed(2) : "New"}</span>
+                    </div>
+                  
+                  
                 </div> 
                 <div className="price-line"><span className="price-num">${spot.price}</span> night</div>
               </div>

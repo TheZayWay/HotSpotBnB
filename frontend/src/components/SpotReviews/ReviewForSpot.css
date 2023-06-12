@@ -3,6 +3,9 @@
     flex-direction: column;
     width: 100%;
     margin-right: 20px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
 }
 
 .description-for-reviews {
@@ -25,7 +28,10 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
     gap: 10px;
-    overflow: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+    /* overflow: hidden; */
 }
 
 @media (max-width: 1250px) {
@@ -77,6 +83,7 @@
 .review-by-user {
     line-height: 20px;
     width: 95%;
+    word-wrap: break-word;
 }
 
 .review-user-firstname {
@@ -118,3 +125,4 @@
 .number-review-header {
     margin-right: 16vw;
 }
+

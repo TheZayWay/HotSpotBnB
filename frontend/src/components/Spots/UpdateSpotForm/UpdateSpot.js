@@ -1,45 +1,111 @@
-import { loadEditSpotThunk, loadSpotIdThunk } from "../../../store/spotReducer";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom"
-export default function UpdateSpot () {
-  const { spotId } = useParams();
-  // console.log("id", spotId)
-  
-  let spotid;
-  const dispatch = useDispatch();
-  const spot = useSelector((state) => state.spot)
-  // console.log("spotid", spotId)
-  const spotInfo = spot[spotId];
-  console.log("spotIn", spotInfo)
+import { useHistory, useParams } from "react-router-dom";
+import { loadEditSpotThunk, loadSpotIdThunk } from "../../../store/spotReducer";
+import './UpdateSpot.css';
 
+export default function UpdateSpotForm() {
+  const { spotId } = useParams();
+  // let spotid;
+  const spotObj = useSelector((state) => state.spot[spotId])
+  // console.log("spotObj", spotObj)
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [address, setAddress] = useState(spotInfo?.address);
-  const [city, setCity] = useState(spotInfo?.city);
-  const [state, setState] = useState(spotInfo?.state);
-  const [country, setCountry] = useState(spotInfo?.country);
-  const [name, setName] = useState(spotInfo?.name);
-  const [description, setDescription] = useState(spotInfo?.description);
-  const [price, setPrice] = useState(spotInfo?.price);
-  const [url, setUrl] = useState(spotInfo?.SpotImages?.[0]?.url)
-  const [errors, setErrors] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
-  console.log("url", url)
-  
-  useEffect(() => {
-    if (spotId) {
-      dispatch(loadSpotIdThunk(spotId));
-      setSubmitted(false);
-    }
-  }, [dispatch, spotId, submitted]);
+  const [address, setAddress] = useState(spotObj?.address ?? "");
+  const [city, setCity] = useState(spotObj?.city ?? "");
+  const [state, setState] = useState(spotObj?.state ?? "");
+  const [country, setCountry] = useState(spotObj?.country ?? "");
+  const [name, setName] = useState(spotObj?.name ?? "");
+  const [description, setDescription] = useState(spotObj?.description ?? "");
+  const [price, setPrice] = useState(spotObj?.price ?? "");
+  const [url, setUrl] = useState(spotObj?.SpotImages?.[0]?.url ?? "");
+    const [errors, setErrors] = useState([]);
+    const [submitted, setSubmitted] = useState(false);
+
+    useEffect(() => {
+      if (spotId) {
+        dispatch(loadSpotIdThunk(spotId));
+      }
+    }, [dispatch, spotId]);
+
+    // useEffect(() => {
+    //       if (spotId) {
+    //         dispatch(loadSpotIdThunk(spotId));
+    //         setSubmitted(false);
+    //       }
+    //     }, [dispatch, spotId, submitted]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
 
-    if (errors.length > 0) return;
+    const validationErrors = [];
 
-    const spotDetails = {
+    const characterRegex = /^[a-zA-Z\s]*$/; // Regex to allow only characters and spaces
+
+    if (!country || !characterRegex.test(country)) {
+      validationErrors.push("Country is required");
+    }
+
+    if (!address || !characterRegex.test(address)) {
+      validationErrors.push("Address is required");
+    }
+
+    if (!city || !characterRegex.test(city)) {
+      validationErrors.push("City is required");
+    }
+
+    if (!state || !characterRegex.test(state)) {
+      validationErrors.push("State is required");
+    }
+    // || !characterRegex.test(description
+    if (description.length < 30 ) {
+      validationErrors.push("Description needs a minimum of 30 characters");
+    }
+
+    if (!name || !characterRegex.test(name)) {
+      validationErrors.push("Name is required");
+    }
+
+    if (!price) {
+      validationErrors.push("Price is required");
+    }
+
+    if (address.length > 25) {
+      validationErrors.push("Address cannot be over 25 characters")
+    }
+
+    if (city.length > 25) {
+      validationErrors.push("City cannot be over 25 characters")
+    }
+
+    if (state.length > 25) {
+      validationErrors.push("State cannot be over 25 characters")
+    }
+
+    if (country.length > 25) {
+      validationErrors.push("Country cannot be over 25 characters")
+    }
+
+    if (name.length > 25) {
+      validationErrors.push("Name cannot be over 25 characters")
+    }
+    
+    
+
+    // if (!url || !characterRegex.test(url)) {
+    //   validationErrors.push("Preview image is required");
+    // } else if (!/\.(png|jpe?g)$/i.test(url)) {
+    //   validationErrors.push("Image URL must end in .png, .jpg, or .jpeg");
+    // }
+
+    if (validationErrors.length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    const newSpotDetails = {
       address,
       city,
       state,
@@ -49,46 +115,45 @@ export default function UpdateSpot () {
       name,
       description,
       price,
-      url
+      url,
     };
 
-    return await dispatch(loadEditSpotThunk(spotDetails, spotId))
-            .then(() => history.push(`/spots/${spotId}`))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    const errorMessages = Object.values(data.errors);
-                    const formattedErrorMessages = errorMessages.map(error => error.split(": ")[1]);
-                    setErrors(formattedErrorMessages);
-                }
-            });
-
+    const newSpot =  await dispatch(loadEditSpotThunk(spotId, newSpotDetails)).then(() => history.push(`/spots/${spotId}`))
+    
   //   try {
-  //     const spot = 
-  //     // spotid = spot.id;  
-  //     setSubmitted(true);
-  //     history.push(`/spots/${spotId}`);
+  //     const newSpot =  await dispatch(loadEditSpotThunk(spotId, spotDetails)).then(() => history.push(`/spots/${spotId}`))
+  //     // spotId = spot.id;
+  //     // setSubmitted(true);
+  //     // history.push(`/spots/${newSpot.id}`);
   //   } catch (error) {
   //     console.error(error);
   //     // Handle error state or display error message to the user
   //   }
-  // };
-  // return await dispatch(loadEditSpotThunk(spotDetails, spotId))
-  // .then(() => history.push(`/spots/${spot.id}`))
-  //       .catch(
-  //         async (res) => {
-  //           const data = await res.json();
-  //           if(data && data.errors) setErrors(data.errors)
-  //         }
-  //       )
-    }
-  
-  
-    return (
-       <div className="entire-create-spot-form">
-        <form className="create-spot-form" onSubmit={handleSubmit}>
-        <h2>Update a Spot</h2>
-        Street Address  
+  };
+
+  // useEffect(() => {
+  //   if (spotId) {
+  //     dispatch(loadSpotIdThunk(spotId));
+  //     setSubmitted(false);
+  //   }
+  // }, [dispatch, spotId, submitted]);
+
+  const hasErrors = errors.length > 0;
+  const allInputsEmpty = !address && !city && !state && !country && !name && !description && !price && !url;
+
+
+  return (
+    <div className={`entire-update-spot-form ${hasErrors ? "has-errors" : ""}`}>
+      <form className="update-spot-form" onSubmit={handleSubmit}>
+        <h2 className="update-spot-title">Update your Spot</h2>
+        <div className="error-container">
+          {errors.map((error, idx) => (
+            <p key={idx} className="validation-error">{error}</p>
+          ))}
+        </div>
+        <p class="update-spot-p-tag">Where's your place located?</p>
+        <div class="update-spot-div">Guests will only get your exact address once they booked a reservation.</div>
+        {/* <span className="form-input-headers">Street Address </span>  */}
         <label>
           <input
             type="text"
@@ -99,7 +164,7 @@ export default function UpdateSpot () {
             placeholder="Street Address"
           />
         </label>
-        City
+        {/* <span className="form-input-headers">City</span>  */}
         <label>
           <input
             type="text"
@@ -110,7 +175,7 @@ export default function UpdateSpot () {
             placeholder="City"
           />
         </label>
-        State
+        {/* <span className="form-input-headers">State</span>  */}
         <label>
           <input
             type="text"
@@ -121,7 +186,7 @@ export default function UpdateSpot () {
             placeholder="State"
           />
         </label>
-        Country
+        {/* <span className="form-input-headers">Country</span>  */}
         <label>
           <input
             type="text"
@@ -132,7 +197,22 @@ export default function UpdateSpot () {
             placeholder="Country"
           />
         </label>
-        Name
+        <p class="update-spot-p-tag">Describe your place to guests</p>
+        <div class="update-spot-div">Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</div>
+        {/* <span className="form-input-headers">Description</span>  */}
+        <label>
+          <textarea
+            type="textarea"
+            required
+            className="input-field"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Please write at least 30 characters"
+          />
+        </label>
+        <p class="update-spot-p-tag">Create a title for your spot</p>
+        <div class="update-spot-div">Catch guests' attention with a spot title that highlights what makes your place special.</div>
+        {/* <span className="form-input-headers">Name</span>  */}
         <label>
           <input
             type="text"
@@ -143,29 +223,23 @@ export default function UpdateSpot () {
             placeholder="Name of your spot"
           />
         </label>
-        Description
-        <label>
-          <textarea
-            type="textarea"
-            required
-            className="input-field"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Please write a description here"
-          />
-        </label>
-        Price
+        <p class="update-spot-p-tag">Set a base price for your spot</p>
+        <div class="update-spot-div">Competitive pricing can help your listing stand out and rank higher in search results.</div>
+        {/* <span className="form-input-headers">Price</span>  */}
         <label>
             <input 
               type="number"
+              min={1}
               required
               className="input-field"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              placeholder="Price in USD"
+              placeholder="Price per night (USD)"
             />
         </label>
-        Image Url of Spot
+        <p class="update-spot-p-tag">Liven up your spot with a photo</p>
+        <div class="update-spot-div">Submit a link to one photo to publish your spot</div>
+        {/* <span className="form-input-headers">Image URL</span>  */}
         <label>
             <input 
                type='url'
@@ -173,12 +247,24 @@ export default function UpdateSpot () {
                onChange={(e) => setUrl(e.target.value)}
                required
                placeholder="Preview Image URL"
+               className="input-field"
             />
         </label>
-        <button type="submit">Update Spot</button>
+        <button className="update-submit-button" type="submit" disabled={allInputsEmpty}>Update Spot</button>
       </form>
-       </div> 
-        
+       </div>  
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

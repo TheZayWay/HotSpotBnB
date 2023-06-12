@@ -14,8 +14,8 @@
 }
 
 .under-image-top-line {
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
 }
 
 .spot-location,
@@ -38,8 +38,9 @@
     font-weight: bold;
 }
 
+
 .card-stars {
-    font-size: medium; 
+    font-size: medium;
 }
 
 .under-image {
@@ -55,8 +56,6 @@
     width: calc(33.33% - 20px);
     margin: 10px;
 }
-
-
 
 
 .tooltip {

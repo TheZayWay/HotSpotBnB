@@ -120,22 +120,36 @@ export const loadCreateSpotThunk = (spot) => async (dispatch) => {
 };
 
 // EDIT A SPOT --- /api/spots/:spotId
-export const loadEditSpotThunk = (spot, id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${id}`, {
+export const loadEditSpotThunk = (spotId, spotDetails) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT', 
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(spot)
+        body: JSON.stringify(spotDetails)
     });
 
     if (response.ok) {
         const updatedSpot = await response.json();
-        console.log("upspot:", updatedSpot)
-        const newlyUpdatedSpot = {...id, ...updatedSpot}
-        console.log("new:", newlyUpdatedSpot)
+        const newlyUpdatedSpot = {...spotId, ...updatedSpot}
         dispatch(loadEditSpot(newlyUpdatedSpot));
         return newlyUpdatedSpot;
     }
 };
+
+// export const loadEditSpotThunk = (spotId, spotDetails) => async (dispatch) => {
+//     const response = await csrfFetch(`/api/spots/${spotId}`, {
+//       method: 'PUT', 
+//       headers: {'Content-Type': 'application/json'},
+//       body: JSON.stringify(spotDetails)
+//     });
+  
+//     if (response.ok) {
+//       const updatedSpot = await response.json();
+//       const newlyUpdatedSpot = { ...spotId, ...updatedSpot };
+//       dispatch(loadEditSpot(newlyUpdatedSpot));
+//       return newlyUpdatedSpot;
+//     }
+//   };
+
 
 // DELETE A SPOT --- /api/spots/:spotId
 export const loadDeleteSpotThunk = (spotId) => async (dispatch) => {
@@ -176,6 +190,12 @@ const spotReducer = (state = initialState, action) => {
             newState[action.spot.id] = action.spot;
             return newState;
         }
+        // case EDIT_SPOT : {
+        //     const newState = { ...state };
+        //     newState[action.spot.id] = { ...newState[action.spot.id], ...action.spot };
+        //     return newState;
+        // }
+        
         case DELETE_SPOT: {
             const newState = {...state};
             delete newState[action.spotId];

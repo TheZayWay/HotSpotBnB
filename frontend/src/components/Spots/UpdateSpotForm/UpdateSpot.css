@@ -1,0 +1,101 @@
+.entire-update-spot-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .update-spot-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    border-width: 2px;
+    width: 500px;
+    min-height: 900px; /* Set a minimum height */
+    transition: min-height 0.3s ease; /* Add transition effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+  }
+  
+  .has-errors .update-spot-form {
+    min-height: 1100px; /* Increase the height when errors are present */
+  }
+
+
+.update-spot-title {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-weight: bold;
+    display: flex;
+    margin-top: -10px;
+    margin-bottom: -15px;
+}
+
+.input-field {
+    width: 492px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 10px; */
+    border: 2px solid black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    
+  }
+  
+
+.update-submit-button {
+    background-color: #007bff;
+    color: whitesmoke;
+    border-radius: 10px;
+    border-color: whitesmoke;
+    height: 35px;
+    margin-top: 10px;
+}
+
+.update-submit-button:hover {
+    cursor: pointer;
+    background-color: whitesmoke;
+    color: gray;
+    padding: 10px 20px;
+    border: 2px solid gray;
+    box-shadow: 2px 2px gray;
+
+}
+
+.form-input-headers {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important; 
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  width: 20px;
+  }
+  
+  .validation-error {
+    color: darkred;
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+  }
+
+  .errors {
+    height: 30px;
+  }
+
+
+.update-spot-p-tag {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+.update-spot-div {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: smaller;
+}
+
+.blocks {
+    color: black;
+}

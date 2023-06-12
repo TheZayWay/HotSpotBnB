@@ -97,7 +97,10 @@ const ReviewsForSpot = ({ spotData }) => {
                           {new Date(review.createdAt).getFullYear()}
                         </div>
                       </div>
-                      <div className="edit-review-div-container">
+                    </div>
+                  </div>
+                  <div className="review-by-user">{review?.review}</div>
+                  <div className="edit-review-div-container">
                         {sessionUserId && sessionUserId === review.userId ? (
                           <OpenModalButton
                             className="delete-review-button"
@@ -106,9 +109,6 @@ const ReviewsForSpot = ({ spotData }) => {
                           />
                         ) : null}
                       </div>
-                    </div>
-                  </div>
-                  <div className="review-by-user">{review?.review}</div>
                 </div>
               </div>
             ))

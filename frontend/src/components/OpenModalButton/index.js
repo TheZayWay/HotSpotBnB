@@ -8,6 +8,7 @@ function OpenModalButton({
   buttonText, // text of the button that opens the modal
   onButtonClick, // optional: callback function that will be called once the button that opens the modal is clicked
   onModalClose, // optional: callback function that will be called once the modal is closed
+  className
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
@@ -19,5 +20,5 @@ function OpenModalButton({
 
   return <button className="modal-button" onClick={onClick}>{buttonText}</button>;
 }
-
+// 
 export default OpenModalButton;

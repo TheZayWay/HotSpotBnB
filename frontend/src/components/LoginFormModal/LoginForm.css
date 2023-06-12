@@ -29,6 +29,7 @@
     padding: 30px;
     height: 180px;
     width: 250px;
+    border-radius: 5px;
 }
 
 .login-form {

@@ -18,7 +18,7 @@ export default function UpdateSpotForm() {
   const [name, setName] = useState(spotObj?.name ?? "");
   const [description, setDescription] = useState(spotObj?.description ?? "");
   const [price, setPrice] = useState(spotObj?.price ?? "");
-  const [url, setUrl] = useState(spotObj?.SpotImages?.[0]?.url ?? "");
+  // const [url, setUrl] = useState(spotObj?.SpotImages?.[0]?.url ?? "");
     const [errors, setErrors] = useState([]);
     const [submitted, setSubmitted] = useState(false);
 
@@ -90,15 +90,7 @@ export default function UpdateSpotForm() {
 
     if (name.length > 25) {
       validationErrors.push("Name cannot be over 25 characters")
-    }
-    
-    
-
-    // if (!url || !characterRegex.test(url)) {
-    //   validationErrors.push("Preview image is required");
-    // } else if (!/\.(png|jpe?g)$/i.test(url)) {
-    //   validationErrors.push("Image URL must end in .png, .jpg, or .jpeg");
-    // }
+    }    
 
     if (validationErrors.length > 0) {
       setErrors(validationErrors);
@@ -114,11 +106,10 @@ export default function UpdateSpotForm() {
       lng: -100,
       name,
       description,
-      price,
-      url,
+      price
     };
-
-    const newSpot =  await dispatch(loadEditSpotThunk(spotId, newSpotDetails)).then(() => history.push(`/spots/${spotId}`))
+    console.log("spotId", spotId)
+    return await dispatch(loadEditSpotThunk(spotId, newSpotDetails)).then(() => history.push(`/spots/${spotId}`));
     
   //   try {
   //     const newSpot =  await dispatch(loadEditSpotThunk(spotId, spotDetails)).then(() => history.push(`/spots/${spotId}`))
@@ -139,18 +130,18 @@ export default function UpdateSpotForm() {
   // }, [dispatch, spotId, submitted]);
 
   const hasErrors = errors.length > 0;
-  const allInputsEmpty = !address && !city && !state && !country && !name && !description && !price && !url;
+  const allInputsEmpty = !address && !city && !state && !country && !name && !description && !price;
 
 
   return (
     <div className={`entire-update-spot-form ${hasErrors ? "has-errors" : ""}`}>
       <form className="update-spot-form" onSubmit={handleSubmit}>
         <h2 className="update-spot-title">Update your Spot</h2>
-        <div className="error-container">
+        <ul className="error-container">
           {errors.map((error, idx) => (
-            <p key={idx} className="validation-error">{error}</p>
+            <li key={idx} className="validation-error">{error}</li>
           ))}
-        </div>
+        </ul>
         <p class="update-spot-p-tag">Where's your place located?</p>
         <div class="update-spot-div">Guests will only get your exact address once they booked a reservation.</div>
         {/* <span className="form-input-headers">Street Address </span>  */}
@@ -235,19 +226,6 @@ export default function UpdateSpotForm() {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               placeholder="Price per night (USD)"
-            />
-        </label>
-        <p class="update-spot-p-tag">Liven up your spot with a photo</p>
-        <div class="update-spot-div">Submit a link to one photo to publish your spot</div>
-        {/* <span className="form-input-headers">Image URL</span>  */}
-        <label>
-            <input 
-               type='url'
-               value={url}
-               onChange={(e) => setUrl(e.target.value)}
-               required
-               placeholder="Preview Image URL"
-               className="input-field"
             />
         </label>
         <button className="update-submit-button" type="submit" disabled={allInputsEmpty}>Update Spot</button>

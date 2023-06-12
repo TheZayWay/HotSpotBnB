@@ -129,7 +129,7 @@ export const loadEditSpotThunk = (spotId, spotDetails) => async (dispatch) => {
 
     if (response.ok) {
         const updatedSpot = await response.json();
-        const newlyUpdatedSpot = {...spotId, ...updatedSpot}
+        const newlyUpdatedSpot = {...updatedSpot}
         dispatch(loadEditSpot(newlyUpdatedSpot));
         return newlyUpdatedSpot;
     }

@@ -127,11 +127,11 @@ export default function CreateSpotForm() {
     <div className={`entire-create-spot-form ${hasErrors ? "has-errors" : ""}`}>
       <form className="create-spot-form" onSubmit={handleSubmit}>
         <h2 className="create-spot-title">Create a Spot</h2>
-        <div className="error-container">
+        <ul className="error-container">
           {errors.map((error, idx) => (
-            <p key={idx} className="validation-error">{error}</p>
+            <li key={idx} className="validation-error">{error}</li>
           ))}
-        </div>
+        </ul>
         <p class="create-spot-p-tag">Where's your place located?</p>
         <div class="create-spot-div">Guests will only get your exact address once they booked a reservation.</div>
         {/* <span className="form-input-headers">Street Address </span>  */}

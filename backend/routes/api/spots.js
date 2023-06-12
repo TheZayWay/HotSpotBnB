@@ -330,7 +330,7 @@ const validateQuery = [
         const spotId = req.params.spotId;
         const ownerId = req.user.id;
         const spot = await Spot.findByPk(spotId);
-        const { address, city, country, lat, lng, name, description, price } = req.body
+        const { address, city, state, country, lat, lng, name, description, price } = req.body
         
         if (!spot) {
           res.status(404).json({message: "Spot couldn't be found"})
@@ -340,6 +340,7 @@ const validateQuery = [
           spot.set({
             address: address,
             city: city,
+            state: state,
             country: country,
             lat: lat,
             lng: lng,

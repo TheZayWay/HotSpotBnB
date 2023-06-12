@@ -32,7 +32,7 @@ export default function CreateSpotForm() {
       validationErrors.push("Country is required");
     }
 
-    if (!address || !characterRegex.test(address)) {
+    if (!address) {
       validationErrors.push("Address is required");
     }
 

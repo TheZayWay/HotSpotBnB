@@ -142,8 +142,8 @@ export default function UpdateSpotForm() {
             <li key={idx} className="validation-error">{error}</li>
           ))}
         </ul>
-        <p class="update-spot-p-tag">Where's your place located?</p>
-        <div class="update-spot-div">Guests will only get your exact address once they booked a reservation.</div>
+        <p className="update-spot-p-tag">Where's your place located?</p>
+        <div className="update-spot-div">Guests will only get your exact address once they booked a reservation.</div>
         {/* <span className="form-input-headers">Street Address </span>  */}
         <label>
           <input
@@ -201,8 +201,8 @@ export default function UpdateSpotForm() {
             placeholder="Please write at least 30 characters"
           />
         </label>
-        <p class="update-spot-p-tag">Create a title for your spot</p>
-        <div class="update-spot-div">Catch guests' attention with a spot title that highlights what makes your place special.</div>
+        <p className="update-spot-p-tag">Create a title for your spot</p>
+        <div className="update-spot-div">Catch guests' attention with a spot title that highlights what makes your place special.</div>
         {/* <span className="form-input-headers">Name</span>  */}
         <label>
           <input
@@ -214,8 +214,8 @@ export default function UpdateSpotForm() {
             placeholder="Name of your spot"
           />
         </label>
-        <p class="update-spot-p-tag">Set a base price for your spot</p>
-        <div class="update-spot-div">Competitive pricing can help your listing stand out and rank higher in search results.</div>
+        <p className="update-spot-p-tag">Set a base price for your spot</p>
+        <div className="update-spot-div">Competitive pricing can help your listing stand out and rank higher in search results.</div>
         {/* <span className="form-input-headers">Price</span>  */}
         <label>
             <input 

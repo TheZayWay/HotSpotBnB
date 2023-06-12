@@ -40,7 +40,7 @@ function LoginFormModal() {
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
-            placeHolder='Username or Email'
+            placeholder='Username or Email'
             className="credential-input"
           />
         </label>
@@ -50,7 +50,7 @@ function LoginFormModal() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            placeHolder='Password'
+            placeholder='Password'
             className="password-input"
           />
         </label>

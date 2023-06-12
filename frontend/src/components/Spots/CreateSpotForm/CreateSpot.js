@@ -48,7 +48,7 @@ export default function CreateSpotForm() {
       validationErrors.push("Description needs a minimum of 30 characters");
     }
 
-    if (!name || !characterRegex.test(name)) {
+    if (!name) {
       validationErrors.push("Name is required");
     }
 

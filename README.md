@@ -24,7 +24,7 @@ HotSpotBnB is a platform that allows you to explore vacation rental properties a
 
 ## Development
 <details open>
-  <summary>Running TeeBay</summary>
+  <summary>Running HotSpotBnB</summary>
   
    1. **Clone this repository (only this branch):**
 

@@ -8,7 +8,7 @@ HotSpotBnB is a platform that allows you to explore vacation rental properties a
 ### Getting Started
 
 1. **Explore TeeBay:**
-   - Visit https://hotspot-bnb-0pvs.onrender.com/) to explore our comprehensive list of vacation rentals.
+   - Visit https://hotspot-bnb-0pvs.onrender.com to explore our comprehensive list of vacation rentals.
 
 2. **Create an Account:**
    - Sign up on HotSpotBnB to post a vacation property.

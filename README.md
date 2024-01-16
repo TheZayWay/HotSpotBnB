@@ -19,7 +19,7 @@ HotSpotBnB is a platform that allows you to explore vacation rental properties a
   <summary>Features</summary>
   
    
-   [MVP Feature List](https://github.com/TheZayWay/TeeBay2/wiki/MVP-Feature-List](https://github.com/TheZayWay/HotSpotBnB/wiki/Feature-List)
+   [MVP Feature List](https://github.com/TheZayWay/HotSpotBnB/wiki/Feature-List)
 </details>
 
 ## Development

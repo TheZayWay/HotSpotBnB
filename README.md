@@ -26,7 +26,7 @@ HotSpotBnB is a platform that allows you to explore vacation rental properties a
 <details open>
   <summary>Running HotSpotBnB</summary>
   
-   ## How to set up repo to run project locally
+   ### How to set up repo to run project locally
 1) Clone [HotspotBnB's repo](https://github.com/thezayway/HotSpotBnB)
 2) At the root directory, run npm install
 3) Go into the backend directory and create a .env file with these added values
